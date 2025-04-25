@@ -1,0 +1,125 @@
+@font-face {
+    font-family: HVD_Comic_Serif_Pro;
+    src: url(../fonts/HVD_Comic_Serif_Pro.otf);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:rgb(132 9 42);
+    background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp);
+    background-position: center;
+    font-family: HVD_Comic_Serif_Pro;
+}
+
+canvas {
+    background-color: rgb(253 254 156);;
+    border: 15px solid rgb(91, 0, 29);
+    border-radius: 20px;
+    border-style: double;
+    display: block;
+}
+
+h1 {
+    font-size: 80px;
+    margin-bottom: 8px;
+    color: rgb(132 9 42);
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: rgb(250, 247, 221);
+    text-shadow: 12px 12px 12px rgb(207, 20, 70);
+}
+
+.overlay_lostgame {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100dvh;
+    width: 100vw;
+    background-image: url(../img_pollo_locco/img/bg_images/lost_game.webp);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay_wingame {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100dvh;
+    width: 100vw;
+    background-image: url(../img_pollo_locco/img/bg_images/win_screen.webp);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play_again_btn {
+    height: 60px;
+    width: 150px;
+    font-family: HVD_Comic_Serif_Pro;
+    font-size: 20px;
+    color: rgb(29 19 22);
+    border-radius: 15px;
+    text-shadow: #FC0 1px 0 10px;
+    border: 1px solid #FC0;
+    background-color: rgb(253 246 155);
+    cursor: pointer;
+    margin-top: 350px;
+    box-shadow: 0 8px 16px 0 #FC0, 0 6px 20px 0 #FC0;
+}
+
+#playAgainWin {
+    margin-top: 0;
+    margin-bottom: 180px;
+}
+
+.play_again_btn:hover {
+    background-color: rgba(255, 204, 0, 0.588);
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out
+}
+
+.instructions {
+    height: 480px;
+    width: 720px;
+    background-color: rgb(253 254 156);;
+    border: 15px solid rgb(91, 0, 29);
+    border-radius: 20px;
+    border-style: double;
+}
+
+.impressum_overlay {
+    height: fit-content;
+    width: 80dvw;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(253 254 156);;
+    border: 15px solid rgb(91, 0, 29);
+    border-radius: 20px;
+    border-style: double;
+}
+
+.impressum_overlay h1 {
+    margin-top: 0;
+}
+
+.impressum_overlay button {
+    margin-left: 80%;
+}
+
+.d_none {display: none;}
