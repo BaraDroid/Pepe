@@ -80,7 +80,9 @@ class MovableObject extends DrawableObject {
         if (hittedEnemy instanceof Chicken) {
             World.chicken.energy -= 1;
             console.log("chicken hit!");
+            AudioHub.playSoundeffect(AudioHub.CHICKENSMASH);
         } else if (hittedEnemy instanceof Babychicken) {
+            //tady sem to vubec nejde, vsechno je jen chicken
             console.log("Küken hit!");
             World.chicken.energy -= 1;
         } else if (hittedEnemy instanceof Endboss) {

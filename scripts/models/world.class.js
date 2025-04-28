@@ -179,6 +179,7 @@ class World {
       if (this.character.isColliding(coin)) {
         coin.y = 500;
         this.collectedCoins++;
+        AudioHub.playSoundeffect(AudioHub.COINCOLLECT);
         this.coinBar.setPercentage(this.collectedCoins * 5);
       }
     });

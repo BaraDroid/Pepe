@@ -9,9 +9,9 @@ static DEAD = new Audio('./audio/male_yell.mp3'); //eingefügt
 static BOTTLECOLLECT = new Audio('./audio/glass_klirr.mp3');    //eingefügt
 static BOTTLETHROW = new Audio('./audio/glass_broken.mp3'); //jen kdyz to trefi endbosse, jinak je v tom ale prisernej bordel
 
-static COINCOLLECT = new Audio('./audio/glass_short.mp3');
+static COINCOLLECT = new Audio('./audio/glass_short.mp3');  //eingefügt
 
-static CHICKENSMASH = new Audio('./audio/chicken_smashed.mp3');
+static CHICKENSMASH = new Audio('./audio/chicken_smashed.mp3'); //
 static BOSSENTER = new Audio('./audio/chicken_clucking.mp3');
 static BOSSHIT = new Audio('./audio/monster_scream.mp3');
 static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3');
