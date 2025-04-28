@@ -1,5 +1,5 @@
 class AudioHub {
-static BACKGROUND = new Audio('./audio/cucaracha.mp3');
+static BACKGROUND = new Audio('./audio/cucaracha.mp3'); //eingefügt
 
 static WALK = new Audio('./audio/footsteps.mp3'); //eingefügt
 static JUMP = new Audio('./audio/jump_boing.mp3');  //eingefügt
@@ -11,12 +11,12 @@ static BOTTLETHROW = new Audio('./audio/glass_broken.mp3'); //jen kdyz to trefi 
 
 static COINCOLLECT = new Audio('./audio/glass_short.mp3');  //eingefügt
 
-static CHICKENSMASH = new Audio('./audio/chicken_smashed.mp3'); //
+static CHICKENSMASH = new Audio('./audio/chicken_smashed.mp3'); //eingefügt
 static BOSSENTER = new Audio('./audio/chicken_clucking.mp3');
-static BOSSHIT = new Audio('./audio/monster_scream.mp3');
-static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3');
+static BOSSHIT = new Audio('./audio/monster_scream.mp3');   //EINGEFÜGT
+static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3'); //nefunguje, pze se mi broken bottle image objevuje furt dokola, takze endboss ani neumre
 
-static VICTORY = new Audio('./audio/fanfare.mp3');
+static VICTORY = new Audio('./audio/fanfare.mp3');  //
 static DEFEAT = new Audio('./audio/dead.mp3')//eingefügt
 
 static ALL = [

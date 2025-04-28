@@ -125,11 +125,14 @@ class MovableObject extends DrawableObject {
             this.deadImageCounter++;
             if(this.deadImageCounter == images.length * 1,5) {
                 this.deadAnimationShown = true;
+                AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
                 setInterval(() => {
                     this.y += 3; //obrazek se zesune z obrazovky pryc
                 }, 1000/60);
                 setTimeout(() => {
                     getWinScreen();
+                    AudioHub.stopBackground();
+                    AudioHub.playSoundeffect(AudioHub.VICTORY);
                 }, 2000);
             }
         }

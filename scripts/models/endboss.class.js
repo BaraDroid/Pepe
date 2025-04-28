@@ -94,10 +94,12 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (!this.isAlert && !this.wasHit) {
                 this.speed = 0.1 + Math.random() * 0.5;
+
                 this.x -= this.speed;
             } 
             else if (this.wasHit && World.chicken.energy > 0) {
                 this.wasHitImageCounter = 0;
+                AudioHub.playSoundeffect(AudioHub.BOSSHIT);
                 //console.log("udaj wasHitImageCounter", this.wasHitImageCounter);
             }
             else if (this.isAlert) {
@@ -105,6 +107,8 @@ class Endboss extends MovableObject {
             }
             else if (World.chicken.energy <= 0) {
                 this.chickenDead = true;
+                //AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
+                //je to v movable object u get loss screen
             }
             
         }, 1000 / 60);
@@ -115,7 +119,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
             else if (this.wasHitImageCounter == 0){
-                console.log("wo bin ich?");
+                console.log("wo bin ich?"); //tohle se ukazuje hned na zacatku hry
                 this.playHurtAnimation(this.IMAGES_HURT);
             }
              else if (this.isAlert) {
@@ -123,7 +127,6 @@ class Endboss extends MovableObject {
             } else if (this.isAttacking) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } 
-            
             else if (this.chickenDead) {
                 this.playAnimation(this.IMAGES_DEAD);
             }
