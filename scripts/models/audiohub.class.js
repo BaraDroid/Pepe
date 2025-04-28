@@ -44,17 +44,26 @@ static backgroundMusicInterval;
     static playBackground() {
         AudioHub.backgroundMusicInterval = setInterval(() => {
             if(AudioHub.BACKGROUND.readyState === 4) {
-                AudioHub.BACKGROUND.volume = 0.2;
+                AudioHub.BACKGROUND.volume = 0.1;
                 AudioHub.BACKGROUND.play();
             }
         }, 200);
+    }
+
+    static playSoundeffect(sound) {
+        sound.volume = 0.4;
+        sound.play();
+    }
+
+    static pauseSoundeffect(sound) {
+        sound.pause();
     }
 
      // Stoppt das Abspielen aller Audiodateien
      static stopAll() {
         AudioHub.ALL.forEach(sound => {
             sound.pause();  // Pausiert jedes Audio in der Liste
-            console.log("ciao!");
+            sound.currentTime = 0;
         });
         clearInterval(AudioHub.backgroundMusicInterval);
      }

@@ -177,7 +177,8 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            this.walking_sound.pause();
+            AudioHub.pauseSoundeffect(AudioHub.WALK);
+            //this.walking_sound.pause();
             this.isWalking = false;
             this.wasHurt = false;
             if (this.isDead()) {
@@ -188,7 +189,8 @@ class Character extends MovableObject {
             } else if (this.isAboveGround() && this.isJumping) {
                 this.playJumpAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.walking_sound.play();
+                AudioHub.playSoundeffect(AudioHub.WALK);
+                //this.walking_sound.play();
                 this.isWalking = true;
                 this.playAnimation(this.IMAGES_WALKING);
             } else if (this.isSleeping) {

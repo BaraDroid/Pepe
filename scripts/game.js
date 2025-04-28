@@ -11,7 +11,6 @@ function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hinter
 
 function startNewGame() {
     AudioHub.playBackground();
-    changeBtnToUnmute();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
     clearLevel();
@@ -46,17 +45,19 @@ function getLossScreen() {
     clearAllIntervals();
 }
 
+
+//das muss in Zukunft nur für das btn auf der startseite sein, falls es nur background music abspielt
 function unmuteMusic() {
-
+ let buttonImage = document.getElementById("soundBtn").querySelector('img');
+ buttonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
+ AudioHub.BACKGROUND.play();
 }
 
-function muteMusic(elementId) {
+//a tady z toho udelat toggle, eine if Abfrage einbauen, falls src muted, unmute a obracene
+function muteMusic() {
+    let buttonImage = document.getElementById("soundBtn").querySelector('img');
+    buttonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
     AudioHub.stopAll();
-    document.getElementById(elementId).innerHTML = `<img src="./img_pollo_locco/icons/sound_muted_icon.png" alt="sound muted icon">`;
-}
-
-function changeBtnToUnmute() {
-    document.getElementById("soundBtn").innerHTML = `<img onclick="muteMusic()" src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">`;
 }
 
 

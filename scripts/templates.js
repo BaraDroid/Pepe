@@ -46,9 +46,7 @@ function getHomeScreenTemplates(){
             
 
                 <div class="main_right">
-                    <button id="soundBtn" class="start_screen_btn">
-                        <img src="./img_pollo_locco/icons/sound_muted_icon.png" alt="sound muted icon">
-                    </button>
+                    
                     <button id="startGameBtn" class="start_screen_btn" onclick="startNewGame()">START PLAY</button>
                 </div>
         </div>
@@ -62,8 +60,8 @@ function getHomeScreenTemplates(){
         <div class="icons"></div>
     </div>
     <div class="control_icons">
-        <button class="icon_button">
-            <img src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">
+        <button class="icon_button" id="soundBtn" onclick="unmuteMusic()" >
+            <img src="./img_pollo_locco/icons/sound_muted_icon.png" alt="sound muted icon">
         </button>
         <button class="icon_button" onclick="getHomeScreen()">
             <img src="./img_pollo_locco/icons/homescreen_icon.png" alt="homescreen icon">
@@ -80,7 +78,7 @@ function getCanvasTemplate(){
     <canvas id="canvas" width="720" height="480">
     </canvas>  
     <div class="control_icons">
-        <button class="icon_button" id="soundBtnOnCanvas" onclick="muteMusic('soundBtnOnCanvas')">
+        <button class="icon_button" id="soundBtn" onclick="muteMusic()">
             <img src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">
         </button>
         <button class="icon_button" onclick="getHomeScreen()">
