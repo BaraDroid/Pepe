@@ -68,8 +68,8 @@ class ThrowableObject extends MovableObject {
 
     animateCollapse() {
         setInterval(() => {
-            console.log("brokenAnimationShown",this.brokenAnimationShown);
-            console.log("brokenAniationCounter", this.brokenAnimationCounter);
+            //console.log("brokenAnimationShown",this.brokenAnimationShown);
+            //console.log("brokenAniationCounter", this.brokenAnimationCounter);
             if (ThrowableObject.collapse) {
                 this.brokenBottle = true;  
                 this.acceleration = 0;            
@@ -77,7 +77,7 @@ class ThrowableObject extends MovableObject {
         }, 1000 / 80);
         setInterval(() => {
             if(this.brokenBottle) {
-                console.log("broken animation");
+                //console.log("broken animation");
                 AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
                 this.playCollapseAnimation(this.IMAGES_BROKEN);
             }
@@ -89,7 +89,7 @@ class ThrowableObject extends MovableObject {
             
             this.playAnimation(brokenImages); 
             this.brokenAnimationCounter++
-            console.log("brokenAnimationCOunter in der play methode", this.brokenAnimationCounter); //der geht nicht über eins
+            //console.log("brokenAnimationCOunter in der play methode", this.brokenAnimationCounter); //der geht nicht über eins
                 if(this.brokenAnimationCounter == brokenImages.length +1) {
                     
                     this.brokenBottle = false;

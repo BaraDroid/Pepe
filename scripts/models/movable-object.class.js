@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     //################ flags ##########################
     otherDirection = false;
     lastHit = 0;
+    currentTime = 0;
 
     //################ falling ##########################
     speedY = 0;
@@ -16,6 +17,17 @@ class MovableObject extends DrawableObject {
     //#####################################################
     //################ methods ##########################
     //#####################################################
+
+    //################ moving ##########################
+    moveRight() {
+        this.x += this.speed;
+        this.otherDirection = false; //flag in welche Richtung er gespiegelt wird inherited from movableObject
+    }
+
+    moveLeft() {
+        this.x -= this.speed;
+        this.otherDirection = true;
+    }
 
     //################ jumping ##########################
     jump() {
@@ -55,40 +67,48 @@ class MovableObject extends DrawableObject {
 
     //################ hits ##########################
     hit() {
-        AudioHub.playSoundeffect(AudioHub.HURT);
-        this.world.level.enemies.forEach((enemy) => {
-            //jede Enemysorte nimmt unterschiedlicher Anzahl an Energy weg
-            if (this.isColliding(enemy)) {
-                if (enemy instanceof Chicken) {
-                    this.energy -= 1;
-                } else if (enemy instanceof Endboss) {
-                    this.energy -= 5;
-                } else if (enemy instanceof Babychicken) {
-                    this.energy -= 0.5;
+        this.currentTime = new Date().getTime();
+        if (this.currentTime - this.lastHit >= 3000) {
+            AudioHub.playSoundeffect(AudioHub.HURT);
+            this.world.level.enemies.forEach((enemy) => {
+                //jede Enemysorte nimmt unterschiedlicher Anzahl an Energy weg
+                if (this.isColliding(enemy)) {
+                    this.checkInstanceOfEnemy(enemy);
                 }
+            });
+            if (this.energy < 0) {
+                this.energy = 0;
+                this.isDead();
             }
-        });
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime(); //wenn wir dieser Zeit haben, können wir auch eine Zeitspanne messen
+            this.lastHit = this.currentTime;
+        }
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+
+    checkInstanceOfEnemy(rival) {
+        if (rival instanceof Endboss) {
+            this.energy -= 20;
+            //console.log("endboss!");
+        } else if (rival instanceof Babychicken) {
+            this.energy -= 0.5;
+            //console.log("babychicken!");
+        }
+        else {
+            this.energy -= 10;
+            //console.log("chicken!");
         }
     }
 
     hitEnemy(hittedEnemy) {
         //every enemy take another amount energy away, it´s one energy pool for all enemies
-        if (hittedEnemy instanceof Chicken) {
-            World.chicken.energy -= 1;
-            console.log("chicken hit!");
-            AudioHub.playSoundeffect(AudioHub.CHICKENSMASH);
-        } else if (hittedEnemy instanceof Babychicken) {
-            //tady sem to vubec nejde, vsechno je jen chicken
-            console.log("Küken hit!");
-            World.chicken.energy -= 1;
-        } else if (hittedEnemy instanceof Endboss) {
+        if (hittedEnemy instanceof Endboss) {
             //hittedEnemy.wasHit = true;
             console.log("Endboss hit!");
-            if(hittedEnemy.wasHit == false) {
+            AudioHub.playSoundeffect(AudioHub.BOSSHIT);
+            if (hittedEnemy.wasHit == false) {
                 hittedEnemy.wasHit = true;
                 World.chicken.energy -= 20;
                 //console.log(World.chicken.energy);
@@ -99,7 +119,8 @@ class MovableObject extends DrawableObject {
                     hittedEnemy.hurtAnimationShown = false;
                 }, 1000);
             }
-            else {World.chicken.energy -= 0;
+            else {
+                World.chicken.energy -= 0;
                 //console.log("jetzt hat das nichts abgezogen");
             }
         }
@@ -107,6 +128,20 @@ class MovableObject extends DrawableObject {
             World.chicken.energy = 0;
         }
     }
+
+    smashEnemy(smashedEnemy) {
+        if (smashedEnemy instanceof Babychicken) {
+            World.chicken.energy -= 1;
+            console.log("küken hit!");
+            AudioHub.playSoundeffect(AudioHub.CHICKENSMASH);
+        } else if (smashedEnemy instanceof Chicken) {
+            //tady sem to vubec nejde, vsechno je jen chicken
+            console.log("chicken hit!");
+            AudioHub.playSoundeffect(AudioHub.CHICKENSMASH);
+            World.chicken.energy -= 1;
+        }
+    }
+
 
     //################ animation ##########################
     playAnimation(images) {
@@ -121,14 +156,14 @@ class MovableObject extends DrawableObject {
                 this.isAlert = false;
             }
         }
-        else if (this instanceof Endboss && this.chickenDead && !this.deadAnimationShown){
+        else if (this instanceof Endboss && this.chickenDead && !this.deadAnimationShown) {
             this.deadImageCounter++;
-            if(this.deadImageCounter == images.length * 1,5) {
+            if (this.deadImageCounter == images.length * 1, 5) {
                 this.deadAnimationShown = true;
                 AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
                 setInterval(() => {
                     this.y += 3; //obrazek se zesune z obrazovky pryc
-                }, 1000/60);
+                }, 1000 / 60);
                 setTimeout(() => {
                     getWinScreen();
                     AudioHub.stopBackground();

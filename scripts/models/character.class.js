@@ -123,46 +123,16 @@ class Character extends MovableObject {
         setInterval(() => {
             this.world.camera_x = -this.x + 100;
             if (this.world.keyboard.RIGHT && this.x < Level.level_end_x) {
-                this.doingNothingCounter = 0;
-                this.longSleep = false;
-                this.isSleeping = false;
-                this.sleepAnimationShown = false;
-                this.longSleepAnimationShown = false;
-                this.sleepImageCounter = 0;
-                this.longSleepAnimationsCounter = 0;
-                this.hurtAnimationShown = false;
-
-                this.x += this.speed;
-                this.otherDirection = false; //flag in welche Richtung er gespiegelt wird inherited from movableObject
+                this.goRight();
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
-                this.doingNothingCounter = 0;
-                this.longSleep = false;
-                this.isSleeping = false;
-                this.sleepAnimationShown = false;
-                this.longSleepAnimationShown = false;
-                this.sleepImageCounter = 0;
-                this.longSleepAnimationsCounter = 0;
-                this.hurtAnimationShown = false;
-
-                this.x -= this.speed;
-                this.otherDirection = true;
-            } else if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.goLeft();
+            } if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 //isAboveGround gives return back
+                this.goUp(); 
+            } if (this.world.keyboard.D) {
                 this.doingNothingCounter = 0;
-                this.longSleep = false;
-                this.jumpImageCounter = 0;
-                this.jump();
-                this.isSleeping = false;
-                this.sleepAnimationShown = false;
-                this.longSleepAnimationsCounter = 0;
-                this.longSleepAnimationShown = false;
-                this.sleepImageCounter = 0;
-                this.hurtAnimationShown = false;
-            } else if (this.world.keyboard.D) {
-                this.doingNothingCounter = 0;
-            }
-            else if (
+            } if (
                 !this.world.keyboard.LEFT &&
                 !this.world.keyboard.RIGHT &&
                 !this.world.keyboard.SPACE &&
@@ -170,9 +140,7 @@ class Character extends MovableObject {
                 !this.sleepAnimationShown &&
                 !this.wasHurt
             ) {
-                this.isSleeping = true;
-                //console.log('normal standing');
-                this.longSleep = false;
+                this.goSleep();
             }
         }, 1000 / 60);
 
@@ -182,20 +150,64 @@ class Character extends MovableObject {
             this.wasHurt = false;
             if (this.isDead()) {
                 this.playDeadAnimation(this.IMAGES_DEAD);
-            } else if (this.isHurt()) {
+            } else if 
+            (this.isHurt()) 
+            {
                 this.playHurtAnimation(this.IMAGES_HURT);
-                
                 this.hurtAnimationShown = false;
             } else if (this.isAboveGround() && this.isJumping) {
                 this.playJumpAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                AudioHub.playSoundeffect(AudioHub.WALK);
                 this.isWalking = true;
                 this.playAnimation(this.IMAGES_WALKING);
             } else if (this.isSleeping) {
                 this.playSleepingAnimation(this.IMAGES_IDLE);
              } 
         }, 100);
+    }
+    //################ movements ##########################
+    goRight() {
+        this.moveRight(); //inherited from movable object
+        AudioHub.playSoundeffect(AudioHub.WALK);
+        this.longSleep = false;
+        this.isSleeping = false;
+        this.sleepAnimationShown = false;
+        this.longSleepAnimationShown = false;
+        this.hurtAnimationShown = false;
+        this.sleepImageCounter = 0;
+        this.longSleepAnimationsCounter = 0;
+        this.doingNothingCounter = 0;
+    }
+
+    goLeft() {
+        this.moveLeft(); //inherited from movable object
+        this.longSleep = false;
+        this.isSleeping = false;
+        this.sleepAnimationShown = false;
+        this.longSleepAnimationShown = false;
+        this.hurtAnimationShown = false;
+        this.sleepImageCounter = 0;
+        this.longSleepAnimationsCounter = 0;
+        this.doingNothingCounter = 0;
+    }
+
+    goUp() {
+        this.jump();    //inherited from movable object
+        this.longSleep = false;
+        this.isSleeping = false;
+        this.sleepAnimationShown = false;
+        this.longSleepAnimationShown = false;
+        this.hurtAnimationShown = false;
+        this.doingNothingCounter = 0;
+        this.jumpImageCounter = 0;
+        this.longSleepAnimationsCounter = 0;
+        this.sleepImageCounter = 0;       
+    }
+
+    goSleep() {
+        this.isSleeping = true;
+        //console.log('normal standing');
+        this.longSleep = false;
     }
 
     //################ animations ##########################
@@ -254,14 +266,11 @@ class Character extends MovableObject {
         }
     }
 
-    //################ hurt & dead ##########################
+    //################ hurt ##########################
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; //difference in ms
         timePassed = timePassed / 1000; //damit kriegen wir sekundenraus
         return timePassed < 1; //also waren wir in letzten 5 Sek getroffen, kommt aus der Funktion TRUE raus
     }
 
-    isDead() {
-        return this.energy == 0; //falls Energie weg ist, gibt uns diese Funktion eine Null raus
-    }
 }

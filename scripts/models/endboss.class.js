@@ -99,7 +99,7 @@ class Endboss extends MovableObject {
             } 
             else if (this.wasHit && World.chicken.energy > 0) {
                 this.wasHitImageCounter = 0;
-                AudioHub.playSoundeffect(AudioHub.BOSSHIT);
+                
                 //console.log("udaj wasHitImageCounter", this.wasHitImageCounter);
             }
             else if (this.isAlert) {

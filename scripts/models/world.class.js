@@ -207,7 +207,7 @@ class World {
         this.character.isColliding(enemy) &&
         this.character.y < 147
       ) {
-        enemy.hitEnemy(enemy);
+        enemy.smashEnemy(enemy);
         this.chickenStatusBar.setPercentage(World.chicken.energy);
         enemy.chickenDead = true;
       }
