@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let gameAudio = new AudioHub();
 
 function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hintergrund läuft
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
