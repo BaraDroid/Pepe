@@ -171,7 +171,7 @@ class Character extends MovableObject {
                 !this.wasHurt
             ) {
                 this.isSleeping = true;
-                console.log('normal standing');
+                //console.log('normal standing');
                 this.longSleep = false;
             }
         }, 1000 / 60);
@@ -184,6 +184,7 @@ class Character extends MovableObject {
                 this.playDeadAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playHurtAnimation(this.IMAGES_HURT);
+                
                 this.hurtAnimationShown = false;
             } else if (this.isAboveGround() && this.isJumping) {
                 this.playJumpAnimation(this.IMAGES_JUMPING);
@@ -220,7 +221,7 @@ class Character extends MovableObject {
             this.playAnimation(images);
             this.sleepImageCounter++;
             this.doingNothingCounter++;
-            console.log(this.doingNothingCounter);
+            //console.log(this.doingNothingCounter);
             if(this.doingNothingCounter >= 37) {
                 this.longSleep = true;
                 this.playLongSleepAnimation(this.IMAGES_IDLE_LONG);
@@ -238,7 +239,7 @@ class Character extends MovableObject {
         if(!this.longSleepAnimationsShown) {
             this.playAnimation(images);
             this.longSleepImageCounter++;
-            console.log('long sleeping!');
+           // console.log('long sleeping!');
         }
     }
 

@@ -58,6 +58,8 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
         setInterval(() => {
             this.playAnimation(this.IMAGES_THROWN);
+            
+            //TODO tohle jede furt dokola, ten sound prichazi porad znova a znova, nejspis musim mojelahve nejdriv zrusit, az dopadnou
             this.x += 25;
             this.brokenAnimationShown = false;
             this.brokenAnimationCounter = 0;
@@ -76,6 +78,7 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             if(this.brokenBottle) {
                 console.log("broken animation");
+                AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
                 this.playCollapseAnimation(this.IMAGES_BROKEN);
             }
         }, 200); 
@@ -83,10 +86,12 @@ class ThrowableObject extends MovableObject {
 
     playCollapseAnimation(brokenImages) {
         if(!this.brokenAnimationShown) {
+            
             this.playAnimation(brokenImages); 
             this.brokenAnimationCounter++
             console.log("brokenAnimationCOunter in der play methode", this.brokenAnimationCounter); //der geht nicht über eins
                 if(this.brokenAnimationCounter == brokenImages.length +1) {
+                    
                     this.brokenBottle = false;
                     this.brokenAnimationShown = true;
                     ThrowableObject.collapse = false;

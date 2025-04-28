@@ -20,6 +20,7 @@ class MovableObject extends DrawableObject {
     //################ jumping ##########################
     jump() {
         this.isJumping = true;
+        AudioHub.playSoundeffect(AudioHub.JUMP);
         this.speedY = 15; //wenn das 30 war, ist er weg von der canvas gesprungen
         this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
         if (this.speedY < 0 && this.y > 130) this.isJumping = false;
@@ -54,6 +55,7 @@ class MovableObject extends DrawableObject {
 
     //################ hits ##########################
     hit() {
+        AudioHub.playSoundeffect(AudioHub.HURT);
         this.world.level.enemies.forEach((enemy) => {
             //jede Enemysorte nimmt unterschiedlicher Anzahl an Energy weg
             if (this.isColliding(enemy)) {

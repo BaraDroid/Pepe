@@ -1,13 +1,13 @@
 class AudioHub {
 static BACKGROUND = new Audio('./audio/cucaracha.mp3');
 
-static WALK = new Audio('./audio/footsteps.mp3');
-static JUMP = new Audio('./audio/jump_boing.mp3');
-static HURT = new Audio('./audio/scream.mp3');
+static WALK = new Audio('./audio/footsteps.mp3'); //eingefügt
+static JUMP = new Audio('./audio/jump_boing.mp3');  //eingefügt
+static HURT = new Audio('./audio/ouch.mp3');  //eingefügt
 static DEAD = new Audio('./audio/male_yell.mp3'); //eingefügt
 
-static BOTTLECOLLECT = new Audio('./audio/glass_klirr.mp3');
-static BOTTLETHROW = new Audio('./audio/glass_broken.mp3');
+static BOTTLECOLLECT = new Audio('./audio/glass_klirr.mp3');    //eingefügt
+static BOTTLETHROW = new Audio('./audio/glass_broken.mp3'); //jen kdyz to trefi endbosse, jinak je v tom ale prisernej bordel
 
 static COINCOLLECT = new Audio('./audio/glass_short.mp3');
 

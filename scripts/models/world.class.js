@@ -167,6 +167,8 @@ class World {
       if (this.character.isColliding(obj)) {
         obj.y = 500;
         World.collectedBottles++;
+        AudioHub.playSoundeffect(AudioHub.BOTTLECOLLECT);
+        console.log(World.collectedBottles);
         this.bottleBar.setPercentage(World.collectedBottles);
       }
     });
