@@ -1,13 +1,16 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let gameAudio = new AudioHub();
+//let gameAudio = new AudioHub();
+//neni dovoleno, aby na strance rovnou zacala hudba, aniz by user nejdriv nemel nejakou interakci
+//TODO dat default ein mutebutton a na jeho click taky muzu s muzikou zacit, ale pak mi to zacne cely odznova, kdyz zacnu hru?
 
 function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hintergrund läuft
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 
 function startNewGame() {
+    let gameAudio = new AudioHub();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
     clearLevel();
