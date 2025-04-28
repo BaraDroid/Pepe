@@ -19,17 +19,44 @@ static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3');
 static VICTORY = new Audio('./audio/fanfare.mp3');
 static DEFEAT = new Audio('./audio/euphonium.mp3')
 
+static ALL = [
+    AudioHub.BACKGROUND,
+    AudioHub.WALK,
+    AudioHub.JUMP,
+    AudioHub.HURT,
+    AudioHub.DEAD,
+    AudioHub.BOTTLECOLLECT,
+    AudioHub.BOTTLETHROW,
+    AudioHub.COINCOLLECT,
+    AudioHub.CHICKENSMASH,
+    AudioHub.BOSSENTER,
+    AudioHub.BOSSHIT,
+    AudioHub.BOSSDEAD,
+    AudioHub.VICTORY,
+    AudioHub.DEFEAT,
+];
+
+static backgroundMusicInterval;
+
     constructor() {
-        AudioHub.playBackground(AudioHub.BACKGROUND);
     }
 
-    static playBackground(sound) {
-        setInterval(() => {
-            if(sound.readyState === 4) {
-                sound.volume = 0.5;
-                sound.play();
+    static playBackground() {
+        AudioHub.backgroundMusicInterval = setInterval(() => {
+            if(AudioHub.BACKGROUND.readyState === 4) {
+                AudioHub.BACKGROUND.volume = 0.2;
+                AudioHub.BACKGROUND.play();
             }
         }, 200);
     }
+
+     // Stoppt das Abspielen aller Audiodateien
+     static stopAll() {
+        AudioHub.ALL.forEach(sound => {
+            sound.pause();  // Pausiert jedes Audio in der Liste
+            console.log("ciao!");
+        });
+        clearInterval(AudioHub.backgroundMusicInterval);
+     }
 
 }

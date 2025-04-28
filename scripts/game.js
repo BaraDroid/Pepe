@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-//let gameAudio = new AudioHub();
+let gameAudio = new AudioHub();
 //neni dovoleno, aby na strance rovnou zacala hudba, aniz by user nejdriv nemel nejakou interakci
 //TODO dat default ein mutebutton a na jeho click taky muzu s muzikou zacit, ale pak mi to zacne cely odznova, kdyz zacnu hru?
 
@@ -10,7 +10,8 @@ function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hinter
   }
 
 function startNewGame() {
-    let gameAudio = new AudioHub();
+    AudioHub.playBackground();
+    changeBtnToUnmute();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
     clearLevel();
@@ -44,6 +45,21 @@ function getLossScreen() {
     clearLevel();
     clearAllIntervals();
 }
+
+function unmuteMusic() {
+
+}
+
+function muteMusic(elementId) {
+    AudioHub.stopAll();
+    document.getElementById(elementId).innerHTML = `<img src="./img_pollo_locco/icons/sound_muted_icon.png" alt="sound muted icon">`;
+}
+
+function changeBtnToUnmute() {
+    document.getElementById("soundBtn").innerHTML = `<img onclick="muteMusic()" src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">`;
+}
+
+
 
 
 
