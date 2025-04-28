@@ -60,6 +60,10 @@ function muteMusic() {
     AudioHub.stopAll();
 }
 
+function stopMusic() {
+    AudioHub.stopAll();
+}
+
 
 
 

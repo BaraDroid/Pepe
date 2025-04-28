@@ -1,12 +1,12 @@
 function getLossScreenTemplate(){
     return `<div id="LostGameOverlay" class="overlay_lostgame">
-        <button id="playAgain" class="play_again_btn" onclick="startNewGame()">Play again</button>
+        <button id="playAgain" class="play_again_btn" onclick="stopMusic(); startNewGame()">Play again</button>
     </div>`;
 }
 
 function getWonScreenTemplate(){
     return `<div class="overlay_wingame">
-        <button id="playAgainWin" class="play_again_btn" onclick="startNewGame()">Play again</button>
+        <button id="playAgainWin" class="play_again_btn" onclick="stopMusic(); startNewGame()">Play again</button>
     </div>`;
 }
 

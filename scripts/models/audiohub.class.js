@@ -4,7 +4,7 @@ static BACKGROUND = new Audio('./audio/cucaracha.mp3');
 static WALK = new Audio('./audio/footsteps.mp3');
 static JUMP = new Audio('./audio/jump_boing.mp3');
 static HURT = new Audio('./audio/scream.mp3');
-static DEAD = new Audio('./audio/dead.mp3');
+static DEAD = new Audio('./audio/male_yell.mp3'); //eingefügt
 
 static BOTTLECOLLECT = new Audio('./audio/glass_klirr.mp3');
 static BOTTLETHROW = new Audio('./audio/glass_broken.mp3');
@@ -17,7 +17,7 @@ static BOSSHIT = new Audio('./audio/monster_scream.mp3');
 static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3');
 
 static VICTORY = new Audio('./audio/fanfare.mp3');
-static DEFEAT = new Audio('./audio/euphonium.mp3')
+static DEFEAT = new Audio('./audio/dead.mp3')//eingefügt
 
 static ALL = [
     AudioHub.BACKGROUND,
@@ -48,6 +48,12 @@ static backgroundMusicInterval;
                 AudioHub.BACKGROUND.play();
             }
         }, 200);
+    }
+
+    static stopBackground() {
+        AudioHub.BACKGROUND.pause();
+        AudioHub.BACKGROUND.currentTime = 0;
+        clearInterval(AudioHub.backgroundMusicInterval);
     }
 
     static playSoundeffect(sound) {

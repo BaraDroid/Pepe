@@ -178,7 +178,6 @@ class Character extends MovableObject {
 
         setInterval(() => {
             AudioHub.pauseSoundeffect(AudioHub.WALK);
-            //this.walking_sound.pause();
             this.isWalking = false;
             this.wasHurt = false;
             if (this.isDead()) {
@@ -190,7 +189,6 @@ class Character extends MovableObject {
                 this.playJumpAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 AudioHub.playSoundeffect(AudioHub.WALK);
-                //this.walking_sound.play();
                 this.isWalking = true;
                 this.playAnimation(this.IMAGES_WALKING);
             } else if (this.isSleeping) {
@@ -202,9 +200,12 @@ class Character extends MovableObject {
     //################ animations ##########################
     playDeadAnimation(imagesDead) {
         this.playAnimation(imagesDead);
+        AudioHub.stopBackground();
+        AudioHub.playSoundeffect(AudioHub.DEAD);
         setTimeout(() => {
             getLossScreen();
-        }, 1500);
+            AudioHub.playSoundeffect(AudioHub.DEFEAT);
+        }, 2000);
     }
 
     playJumpAnimation(jumpImages) {
