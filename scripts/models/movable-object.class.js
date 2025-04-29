@@ -104,6 +104,10 @@ class MovableObject extends DrawableObject {
 
     hitEnemy(hittedEnemy) {
         //every enemy take another amount energy away, it´s one energy pool for all enemies
+        if(hittedEnemy instanceof Chicken) {
+            //console.log('chicken hit with bottel');
+            this.smashEnemy(hittedEnemy);
+        }
         if (hittedEnemy instanceof Endboss) {
             //hittedEnemy.wasHit = true;
             console.log("Endboss hit!");
@@ -132,13 +136,15 @@ class MovableObject extends DrawableObject {
     smashEnemy(smashedEnemy) {
         if (smashedEnemy instanceof Babychicken) {
             World.chicken.energy -= 1;
-            console.log("küken hit!");
+            //console.log("küken hit!");
             AudioHub.playSoundeffect(AudioHub.CHICKENSMASH);
         } else if (smashedEnemy instanceof Chicken) {
-            //tady sem to vubec nejde, vsechno je jen chicken
-            console.log("chicken hit!");
+            //console.log("chicken hit!");
             AudioHub.playSoundeffect(AudioHub.CHICKENSMASH);
             World.chicken.energy -= 1;
+        }
+        if (World.chicken.energy < 0) {
+            World.chicken.energy = 0;
         }
     }
 

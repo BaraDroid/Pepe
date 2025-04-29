@@ -194,6 +194,7 @@ class World {
           ThrowableObject.collapse = true;
           console.log("ist collapse true?",ThrowableObject.collapse);
           this.chickenStatusBar.setPercentage(World.chicken.energy);
+          enemy.chickenDead = true;
         }
       }
     });
