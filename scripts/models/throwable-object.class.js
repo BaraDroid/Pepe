@@ -40,12 +40,13 @@ class ThrowableObject extends MovableObject {
     //#####################################################
     //################ constructor ##########################
     //#####################################################
-    constructor(x, y) {
+    constructor(x, y, characterDirection) {
         super().loadImage("img_pollo_locco/img/6_salsa_bottle/salsa_bottle.png");
         this.loadImages(this.IMAGES_THROWN);
         this.loadImages(this.IMAGES_BROKEN);
         this.x = x;
         this.y = y;
+        this.otherDirection = characterDirection;
         this.throw();
         this.animateCollapse();
     }
@@ -54,7 +55,9 @@ class ThrowableObject extends MovableObject {
     //################ methods ##########################
     //#####################################################
     throw() {
-        this.speedY = 45;
+        if(!this.otherDirection) {
+            console.log("hazi vpravo");
+            this.speedY = 45;
         this.applyGravity();
         setInterval(() => {
             this.playAnimation(this.IMAGES_THROWN);
@@ -62,6 +65,19 @@ class ThrowableObject extends MovableObject {
             this.brokenAnimationShown = false;
             this.brokenAnimationCounter = 0;
         }, 1000 / 15);
+        }
+        else if (this.otherDirection) {
+            console.log('hazi vlevo');
+            this.speedY = 45;
+            this.applyGravity();
+            setInterval(() => {
+                this.playAnimation(this.IMAGES_THROWN);
+                this.x -= 25;
+                this.brokenAnimationShown = false;
+                this.brokenAnimationCounter = 0;
+            }, 1000 / 15);
+        }
+        
     }
 
     

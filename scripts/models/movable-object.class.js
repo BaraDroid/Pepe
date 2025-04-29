@@ -21,7 +21,7 @@ class MovableObject extends DrawableObject {
     //################ moving ##########################
     moveRight() {
         this.x += this.speed;
-        this.otherDirection = false; //flag in welche Richtung er gespiegelt wird inherited from movableObject
+        this.otherDirection = false; //flag in welche Richtung er gespiegelt wird 
     }
 
     moveLeft() {

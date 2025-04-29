@@ -230,7 +230,14 @@ class World {
   //################ checking flags ##########################
   checkThrownObjects() {
     if (this.keyboard.D && World.collectedBottles > 0) {
-      this.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
+      if(!this.character.otherDirection) {
+        this.bottle = new ThrowableObject(this.character.x + 50, this.character.y + 110, this.character.otherDirection);
+        console.log('nova lahev doprava');
+      }
+      else if (this.character.otherDirection) {
+        this.bottle = new ThrowableObject(this.character.x - 20, this.character.y + 110, this.character.otherDirection);
+        console.log('nova lahev doleva');
+      }
       this.throwableObjects.push(this.bottle);
       World.collectedBottles--;
       console.log(World.collectedBottles);
