@@ -191,13 +191,24 @@ class World {
         const enemy = this.level.enemies[index];
         if (bottle.isColliding(enemy)) {
           enemy.hitEnemy(enemy);
-          ThrowableObject.collapse = true;
-          console.log("ist collapse true?",ThrowableObject.collapse);
+          bottle.collapse = true;
+          AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
+          console.log("ist collapse true?",bottle.collapse);
           this.chickenStatusBar.setPercentage(World.chicken.energy);
           enemy.chickenDead = true;
         }
+        else if (!bottle.isColliding(enemy) && bottle.y >= 342 && !bottle.collapse) {
+          this.checkCollisionWithGround(bottle);
+        }
       }
     });
+  }
+
+  checkCollisionWithGround(flask) {
+    AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
+    flask.playCollapseAnimation(flask.IMAGES_BROKEN);
+    console.log('Flasche am boden zerplatzt');
+    flask.collapse = true;
   }
 
   checkCollisionFromJump() {

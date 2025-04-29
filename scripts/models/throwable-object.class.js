@@ -9,7 +9,7 @@ class ThrowableObject extends MovableObject {
     accelaration = 5;
 
     //################ attributes ##########################
-    static collapse = false; //wird auf true gesetzt, wenn sich die Flasche zerstören soll
+    collapse = false; //wird auf true gesetzt, wenn sich die Flasche zerstören soll
     brokenBottle = false;
     brokenAnimationShown = false;
     brokenAnimationCounter = 0;
@@ -70,15 +70,14 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             //console.log("brokenAnimationShown",this.brokenAnimationShown);
             //console.log("brokenAniationCounter", this.brokenAnimationCounter);
-            if (ThrowableObject.collapse) {
+            if (this.collapse) {
                 this.brokenBottle = true;  
                 this.acceleration = 0;            
             }
         }, 1000 / 80);
         setInterval(() => {
-            if(this.brokenBottle) {
+            if(this.brokenBottle && !this.brokenAnimationShown) {
                 //console.log("broken animation");
-                AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
                 this.playCollapseAnimation(this.IMAGES_BROKEN);
             }
         }, 200); 
@@ -99,15 +98,5 @@ class ThrowableObject extends MovableObject {
             }
         }
 
-    // playHurtAnimation(hurtImages) {
-    //     if(!this.hurtAnimationShown) {
-    //         this.wasHitImageCounter++;
-    //         this.playAnimation(hurtImages);
-    //         if(this.wasHitImageCounter == hurtImages.length + 1){
-    //             this.wasHit = false;
-    //             this.hurtAnimationShown = true;
-    //         }
-    //     }
-    // }
 }
 
