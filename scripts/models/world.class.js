@@ -193,9 +193,12 @@ class World {
           enemy.hitEnemy(enemy);
           bottle.collapse = true;
           AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
-          console.log("ist collapse true?",bottle.collapse);
+          //console.log("ist collapse true?",bottle.collapse);
           this.chickenStatusBar.setPercentage(World.chicken.energy);
-          enemy.chickenDead = true;
+          if(enemy instanceof Babychicken || enemy instanceof Chicken) {
+            enemy.chickenDead = true;
+          }
+          
         }
         else if (!bottle.isColliding(enemy) && bottle.y >= 342 && !bottle.collapse) {
           this.checkCollisionWithGround(bottle);
@@ -207,7 +210,7 @@ class World {
   checkCollisionWithGround(flask) {
     AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
     flask.playCollapseAnimation(flask.IMAGES_BROKEN);
-    console.log('Flasche am boden zerplatzt');
+    //console.log('Flasche am boden zerplatzt');
     flask.collapse = true;
   }
 

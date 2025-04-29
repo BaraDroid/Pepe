@@ -90,10 +90,9 @@ class ThrowableObject extends MovableObject {
             this.brokenAnimationCounter++
             //console.log("brokenAnimationCOunter in der play methode", this.brokenAnimationCounter); //der geht nicht über eins
                 if(this.brokenAnimationCounter == brokenImages.length +1) {
-                    
                     this.brokenBottle = false;
                     this.brokenAnimationShown = true;
-                    ThrowableObject.collapse = false;
+                    this.collapse = false;
                 }
             }
         }

@@ -134,39 +134,35 @@ class MovableObject extends DrawableObject {
     }
 
     smashEnemy(smashedEnemy) {
-        if (smashedEnemy instanceof Babychicken) {
-            World.chicken.energy -= 1;
-            //console.log("küken hit!");
+        if (smashedEnemy instanceof Babychicken || smashedEnemy instanceof Chicken) {
             AudioHub.playSoundeffect(AudioHub.CHICKENSMASH);
-        } else if (smashedEnemy instanceof Chicken) {
-            //console.log("chicken hit!");
-            AudioHub.playSoundeffect(AudioHub.CHICKENSMASH);
-            World.chicken.energy -= 1;
-        }
-        if (World.chicken.energy < 0) {
-            World.chicken.energy = 0;
-        }
+        } 
     }
 
 
     //################ animation ##########################
     playAnimation(images) {
+        
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
         if (this instanceof Endboss && this.isAlert && !this.alertAnimationShown) {
+            
             this.alertImageCounter++;
             if (this.alertImageCounter == images.length + 1) {
                 this.alertAnimationShown = true;
                 this.isAlert = false;
             }
         }
-        else if (this instanceof Endboss && this.chickenDead && !this.deadAnimationShown) {
-            this.deadImageCounter++;
-            if (this.deadImageCounter == images.length * 1, 5) {
+        else if (this instanceof Endboss && this.chickenDead) {
+            // console.log("deadImageCounter". this.deadImageCounter);
+            // this.deadImageCounter++;
+            // if (this.deadImageCounter == images.length * 1.5) {
+                
                 this.deadAnimationShown = true;
                 AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
+                console.log("there should start endboss dead animation");
                 setInterval(() => {
                     this.y += 3; //obrazek se zesune z obrazovky pryc
                 }, 1000 / 60);
@@ -175,7 +171,7 @@ class MovableObject extends DrawableObject {
                     AudioHub.stopBackground();
                     AudioHub.playSoundeffect(AudioHub.VICTORY);
                 }, 2000);
-            }
+           // }
         }
     }
 

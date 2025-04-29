@@ -91,47 +91,81 @@ class Endboss extends MovableObject {
     //################ methods ##########################
     //#####################################################
     animateEndboss() {
-        setInterval(() => {
-            if (!this.isAlert && !this.wasHit) {
-                this.speed = 0.1 + Math.random() * 0.5;
-
-                this.x -= this.speed;
-            } 
-            else if (this.wasHit && World.chicken.energy > 0) {
-                this.wasHitImageCounter = 0;
+        // setInterval(() => {
+        //     if (!this.isAlert && !this.wasHit) {
+        //         this.wasHit = false;
+        //         this.speed = 0.1 + Math.random() * 0.5;
+        //         this.x -= this.speed;
+        //     } 
+        //     else if (this.wasHit && World.chicken.energy > 0) {
+        //         this.wasHitImageCounter = 0;
                 
-                //console.log("udaj wasHitImageCounter", this.wasHitImageCounter);
-            }
-            else if (this.isAlert) {
-                this.speed = 0;
-            }
-            else if (World.chicken.energy <= 0) {
-                this.chickenDead = true;
-                //AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
-                //je to v movable object u get loss screen
-            }
+        //         //console.log("udaj wasHitImageCounter", this.wasHitImageCounter);
+        //     }
+        //     else if (this.isAlert) {
+        //         this.speed = 0;
+        //     }
+        //     else if (World.chicken.energy <= 0) {
+        //         this.chickenDead = true;
+        //         //AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
+        //         //je to v movable object u get loss screen
+        //     }
             
-        }, 1000 / 60);
+        // }, 1000 / 60);
+
         setInterval(() => {
-            if (!this.isAlert && World.chicken.energy > 0 && !this.isAttacking && this.wasHitImageCounter > 0) {
-                //pokud tam nebude !is.Attacking, slepice Pepeho i pri kolizi proste prejde
-                this.hurtAnimationShown = false;
-                this.playAnimation(this.IMAGES_WALKING);
+            // Bewegungssteuerung
+            if (!this.isAlert && !this.wasHit && !this.chickenDead) {
+                this.speed = 0.1 + Math.random() * 0.5;
+                this.x -= this.speed;
+            } if (this.isAlert || this.chickenDead) {
+                this.speed = 0; // Keine Bewegung in diesen Zuständen
+            }          
+            if (World.chicken.energy <= 0) {
+                this.chickenDead = true;
             }
-            else if (this.wasHitImageCounter == 0){
-                console.log("wo bin ich?"); //tohle se ukazuje hned na zacatku hry
-                this.playHurtAnimation(this.IMAGES_HURT);
-            }
-             else if (this.isAlert) {
-                this.playAnimation(this.IMAGES_ALERT);
+
+            // Die Logik für das Zurücksetzen von wasHitImageCounter gehört in den Animations-Interval
+            // damit die Bewegung nicht sofort unterbrochen wird.
+        }, 1000 / 60);
+        // setInterval(() => {
+        //     if (!this.isAlert && World.chicken.energy > 0 && !this.isAttacking && this.wasHitImageCounter > 0) {
+        //         //pokud tam nebude !is.Attacking, slepice Pepeho i pri kolizi proste prejde
+        //         this.hurtAnimationShown = false;
+        //         this.wasHit = false;
+        //         this.playAnimation(this.IMAGES_WALKING);
+        //     }
+        //     else if (this.wasHitImageCounter == 0 && this.wasHit){
+        //         //musim to nekde zase dat na false
+        //         console.log("wo bin ich?"); //tohle se ukazuje hned na zacatku hry
+        //         this.playHurtAnimation(this.IMAGES_HURT);
+        //     }
+        //      else if (this.isAlert) {
+        //         this.wasHit = false;
+        //         this.playAnimation(this.IMAGES_ALERT);
+        //     } else if (this.isAttacking) {
+        //         this.playAnimation(this.IMAGES_ATTACK);
+        //     } 
+        //     else if (this.chickenDead) {
+        //         this.wasHit = false;
+        //         console.log("dead animation should be playing");
+        //         this.playAnimation(this.IMAGES_DEAD);
+        //     }
+        // }, 350);
+        setInterval(() => {
+            // Animationssteuerung
+            if (this.chickenDead) {
+                this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isAttacking) {
                 this.playAnimation(this.IMAGES_ATTACK);
-            } 
-            else if (this.chickenDead) {
-                this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.wasHit) {
+                this.playHurtAnimation(this.IMAGES_HURT);
+            } else if (this.isAlert) {
+                this.playAnimation(this.IMAGES_ALERT);
+            } else {
+                this.playAnimation(this.IMAGES_WALKING);
             }
         }, 350);
-
     }
 
 playHurtAnimation(hurtImages) {
@@ -141,6 +175,7 @@ if(!this.hurtAnimationShown) {
     if(this.wasHitImageCounter == hurtImages.length + 1){
         this.wasHit = false;
         this.hurtAnimationShown = true;
+        this.wasHitImageCounter = 0;
     }
 }
 }
