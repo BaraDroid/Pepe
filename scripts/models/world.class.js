@@ -20,7 +20,7 @@ class World {
   //################ enemy ##########################
   static chicken = new Chicken();
   bottle;
-  static throwableObjects = []; //TODO warum ist hier static
+  throwableObjects = [];
 
   //################ statuses ##########################
   statusBar = new StatusBar();
@@ -55,7 +55,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
-    this.addObjectsToMap(World.throwableObjects);
+    this.addObjectsToMap(this.throwableObjects);
     this.addObjectsToMap(this.level.collectableObjects);
     this.addObjectsToMap(this.level.coins);
     this.ctx.translate(-this.camera_x, 0); //moves camera with character
@@ -116,7 +116,6 @@ class World {
       this.checkCollisions(); //check, if an enemy touch Pepe
       this.checkThrownObjects(); //method to throw bottles
       this.checkDistanceToEndboss(); //check the distance and I can put another animation on Endboss
-      this.checkThrownObjects(); //method to throw bottles wenn ich das in das untere gebe, werfe ich alle Flaschen auf einmal
     }, 200);
     setInterval(() => {
       this.checkCollisionFromJump(); //checking, if Pepe jump on Chicken or Babychicken and make them dead
@@ -186,7 +185,7 @@ class World {
   }
 
   checkCollisionsWithThrowableBottles() {
-    World.throwableObjects.forEach((bottle) => {
+    this.throwableObjects.forEach((bottle) => {
       for (let index = 0; index < this.level.enemies.length; index++) {
         const enemy = this.level.enemies[index];
         if (bottle.isColliding(enemy)) {
@@ -198,7 +197,6 @@ class World {
           if(enemy instanceof Babychicken || enemy instanceof Chicken) {
             enemy.chickenDead = true;
           }
-          
         }
         else if (!bottle.isColliding(enemy) && bottle.y >= 342 && !bottle.collapse) {
           this.checkCollisionWithGround(bottle);
@@ -233,7 +231,7 @@ class World {
   checkThrownObjects() {
     if (this.keyboard.D && World.collectedBottles > 0) {
       this.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
-      World.throwableObjects.push(this.bottle);
+      this.throwableObjects.push(this.bottle);
       World.collectedBottles--;
       console.log(World.collectedBottles);
       this.bottleBar.setPercentage(World.collectedBottles);

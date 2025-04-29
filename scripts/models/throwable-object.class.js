@@ -58,13 +58,13 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
         setInterval(() => {
             this.playAnimation(this.IMAGES_THROWN);
-            
-            //TODO tohle jede furt dokola, ten sound prichazi porad znova a znova, nejspis musim mojelahve nejdriv zrusit, az dopadnou
             this.x += 25;
             this.brokenAnimationShown = false;
             this.brokenAnimationCounter = 0;
         }, 1000 / 15);
     }
+
+    
 
     animateCollapse() {
         setInterval(() => {

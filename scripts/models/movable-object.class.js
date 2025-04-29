@@ -90,14 +90,14 @@ class MovableObject extends DrawableObject {
 
     checkInstanceOfEnemy(rival) {
         if (rival instanceof Endboss) {
-            this.energy -= 20;
+            this.energy -= 25;
             //console.log("endboss!");
         } else if (rival instanceof Babychicken) {
             this.energy -= 0.5;
             //console.log("babychicken!");
         }
         else {
-            this.energy -= 10;
+            this.energy -= 8;
             //console.log("chicken!");
         }
     }
@@ -121,7 +121,7 @@ class MovableObject extends DrawableObject {
                     hittedEnemy.wasHit = false;
                     //console.log("tady by to melo byt znova false", hittedEnemy.wasHit),
                     hittedEnemy.hurtAnimationShown = false;
-                }, 1000);
+                }, 1200);
             }
             else {
                 World.chicken.energy -= 0;
