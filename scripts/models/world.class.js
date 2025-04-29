@@ -116,7 +116,7 @@ class World {
       this.checkCollisions(); //check, if an enemy touch Pepe
       this.checkThrownObjects(); //method to throw bottles
       this.checkDistanceToEndboss(); //check the distance and I can put another animation on Endboss
-    }, 200);
+    }, 300);
     setInterval(() => {
       this.checkCollisionFromJump(); //checking, if Pepe jump on Chicken or Babychicken and make them dead
       this.checkCollisionsWithCollectableBottles(); //method for collecting salsa bottles from the ground
@@ -255,8 +255,9 @@ class World {
   }
 
   checkAttackDistance() {
-    if (this.character.isColliding(this.level.enemies[3])) {
-      //console.log("attack distance erreicht");
+    //if (this.character.isColliding(this.level.enemies[3])) {
+    if (this.level.enemies[3].x - this.character.x + this.character.width < 300) {
+      console.log("attack distance erreicht");
       this.level.enemies[3].isAttacking = true;
     } else {
       this.level.enemies[3].isAttacking = false;
