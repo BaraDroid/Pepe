@@ -80,38 +80,68 @@ class ThrowableObject extends MovableObject {
         
     }
 
-    
+    // animateCollapse() {
+    //     setInterval(() => {
+    //         console.log("brokenAnimationShown",this.brokenAnimationShown);
+    //         //console.log("brokenAniationCounter", this.brokenAnimationCounter);
+    //         if (this.collapse) {
+    //             this.brokenBottle = true;  
+    //             this.acceleration = 0;            
+    //         }
+    //     }, 1000 / 80);
+    //     setInterval(() => {
+    //         if(this.brokenBottle && !this.brokenAnimationShown) {
+    //             //console.log("broken animation");
+    //             this.playCollapseAnimation(this.IMAGES_BROKEN);
+    //         }
+    //     }, 200); 
+    // }
 
     animateCollapse() {
-        setInterval(() => {
-            //console.log("brokenAnimationShown",this.brokenAnimationShown);
-            //console.log("brokenAniationCounter", this.brokenAnimationCounter);
+        let collapseInterval = setInterval(() => {
             if (this.collapse) {
-                this.brokenBottle = true;  
-                this.acceleration = 0;            
+                this.brokenBottle = true;
+                this.acceleration = 0;
             }
         }, 1000 / 80);
-        setInterval(() => {
-            if(this.brokenBottle && !this.brokenAnimationShown) {
-                //console.log("broken animation");
-                this.playCollapseAnimation(this.IMAGES_BROKEN);
-            }
-        }, 200); 
-    }
 
-    playCollapseAnimation(brokenImages) {
-        if(!this.brokenAnimationShown) {
-            
-            this.playAnimation(brokenImages); 
-            this.brokenAnimationCounter++
-            //console.log("brokenAnimationCOunter in der play methode", this.brokenAnimationCounter); //der geht nicht über eins
-                if(this.brokenAnimationCounter == brokenImages.length +1) {
-                    this.brokenBottle = false;
-                    this.brokenAnimationShown = true;
-                    this.collapse = false;
+        let animationInterval = setInterval(() => {
+            if (this.brokenBottle && !this.brokenAnimationShown) {
+                this.playCollapseAnimation(this.IMAGES_BROKEN);
+                if (this.brokenAnimationShown) {
+                    clearInterval(collapseInterval); // Stoppe den collapse-Check
+                    clearInterval(animationInterval); // Stoppe den Animations-Check
+                    // Hier könntest du auch die Flasche aus dem Spiel entfernen (z.B. destroySelf())
                 }
             }
+        }, 200);
+    }
+
+    // playCollapseAnimation(brokenImages) {
+    //     if(!this.brokenAnimationShown) {
+            
+    //         this.playAnimation(brokenImages); 
+    //         this.brokenAnimationCounter++
+    //         //console.log("brokenAnimationCOunter in der play methode", this.brokenAnimationCounter); //der geht nicht über eins
+    //             if(this.brokenAnimationCounter == brokenImages.length +1) {
+    //                 this.brokenBottle = false;
+    //                 this.brokenAnimationShown = true;
+    //                 this.collapse = false;
+    //             }
+    //         }
+    //     }
+
+    playCollapseAnimation(brokenImages) {
+        if (!this.brokenAnimationShown) {
+            this.playAnimation(brokenImages);
+            this.brokenAnimationCounter++;
+            if (this.brokenAnimationCounter >= brokenImages.length) { // Geändert zu >=
+                this.brokenBottle = false;
+                this.brokenAnimationShown = true;
+                this.collapse = false; // Setze collapse zurück, falls nötig
+            }
         }
+    }
 
 }
 
