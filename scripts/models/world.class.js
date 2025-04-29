@@ -127,7 +127,7 @@ class World {
 
   sendNewChicken() {  //TODO warum ist das nicht bei chickens/babychickens?-weil dort kann ich nicht auf level greifen
     //nach 6 Sekunden werden neue Chicken freigelassen
-    setTimeout(() => {
+    setInterval(() => {
       let newX = Level.level_end_x + 500 + 720 * Math.random();
       let newChicken = new Chicken();
       newChicken.x = newX;
@@ -135,8 +135,8 @@ class World {
       //console.log("new chicken created");
       //tady proste do toho arraye v levelu 1 musim nacpat dalsi tri novy chicken. Jen nevim, jak ho ansprechen!
       //a taky bych chtela, aby tady zacinali az vzadu, jinak muzu "obejit" misto jejich zrodu
-    }, 3000);
-    setTimeout(() => {
+    }, 500);
+    setInterval(() => {
       let newX = Level.level_end_x;
       let newBabychicken = new Babychicken();
       newBabychicken.x = newX;
