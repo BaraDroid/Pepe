@@ -114,7 +114,7 @@ class Endboss extends MovableObject {
         // }, 1000 / 60);
 
         setInterval(() => {
-            // Bewegungssteuerung
+
             if (!this.isAlert && !this.wasHit && !this.chickenDead) {
                 this.speed = 0.1 + Math.random() * 0.5;
                 this.x -= this.speed;
@@ -124,9 +124,6 @@ class Endboss extends MovableObject {
             if (World.chicken.energy <= 0) {
                 this.chickenDead = true;
             }
-
-            // Die Logik für das Zurücksetzen von wasHitImageCounter gehört in den Animations-Interval
-            // damit die Bewegung nicht sofort unterbrochen wird.
         }, 1000 / 60);
         // setInterval(() => {
         //     if (!this.isAlert && World.chicken.energy > 0 && !this.isAttacking && this.wasHitImageCounter > 0) {
@@ -153,9 +150,9 @@ class Endboss extends MovableObject {
         //     }
         // }, 350);
         setInterval(() => {
-            // Animationssteuerung
             if (this.chickenDead) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.bossDead();
             } else if (this.isAttacking) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.wasHit) {
@@ -178,6 +175,22 @@ if(!this.hurtAnimationShown) {
         this.wasHitImageCounter = 0;
     }
 }
+}
+
+bossDead() {
+    AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
+    this.deadAnimationShown = true;
+    console.log("there should start endboss dead animation");
+    setInterval(() => {
+        this.y += 3; //obrazek se zesune z obrazovky pryc
+    }, 1000 / 60);
+    setTimeout(() => {
+        this.deadAnimationshown = false;
+        this.chickenDead = false;
+        getWinScreen();
+        AudioHub.stopBackground();
+        AudioHub.playSoundeffect(AudioHub.VICTORY);
+    }, 2000);
 }
 
 }

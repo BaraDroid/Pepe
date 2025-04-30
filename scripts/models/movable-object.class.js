@@ -155,27 +155,29 @@ class MovableObject extends DrawableObject {
                 this.isAlert = false;
             }
         }
-        else if (this instanceof Endboss && this.chickenDead) {
-            // console.log("deadImageCounter". this.deadImageCounter);
-            // this.deadImageCounter++;
-            // if (this.deadImageCounter == images.length * 1.5) {
-                
-                this.deadAnimationShown = true;
-                AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
-                console.log("there should start endboss dead animation");
-                setInterval(() => {
-                    this.y += 3; //obrazek se zesune z obrazovky pryc
-                }, 1000 / 60);
-                setTimeout(() => {
-                    this.deadAnimationshown = false;
-                    this.chickenDead = false;
-                    console.log("gameover auf true");
-                    getWinScreen();
-                    AudioHub.stopBackground();
-                    AudioHub.playSoundeffect(AudioHub.VICTORY);
-                }, 2000);
-           // }
-        }
+
+        //das ganze gebe ich als bossDead() direkt in endboss class:
+
+        // else if (this instanceof Endboss && this.chickenDead) {
+        //     // console.log("deadImageCounter". this.deadImageCounter);
+        //     // this.deadImageCounter++;
+        //     // if (this.deadImageCounter == images.length * 1.5) {
+        //         AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
+        //         this.deadAnimationShown = true;
+        //         console.log("there should start endboss dead animation");
+        //         setInterval(() => {
+        //             this.y += 3; //obrazek se zesune z obrazovky pryc
+        //         }, 1000 / 60);
+        //         setTimeout(() => {
+        //             this.deadAnimationshown = false;
+        //             this.chickenDead = false;
+        //             console.log("gameover auf true");
+        //             getWinScreen();
+        //             AudioHub.stopBackground();
+        //             AudioHub.playSoundeffect(AudioHub.VICTORY);
+        //         }, 2000);
+        //    // }
+        // }
     }
 
 
