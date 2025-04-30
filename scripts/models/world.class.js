@@ -277,8 +277,8 @@ class World {
   }
 
   resetGame() {
-    console.log("chickenDead is", this.level.enemies.chickenDead);
-    console.log(this.level.enemies[3]);
+    //console.log("chickenDead is", this.level.enemies.chickenDead);
+    //console.log(this.level.enemies[3]);
     this.level.enemies.chickenDead = false;
       this.level.enemies[3].chickenDead = false;
       World.collectedBottles = 0;
@@ -287,7 +287,7 @@ class World {
       this.level.enemies[3].energy = 100;
       World.gameOver = false;
       World.chicken.energy = 100;
-      console.log("chicken energy", World.chicken.energy);
+      World.chicken = new Chicken();
     }
 
 

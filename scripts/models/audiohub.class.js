@@ -39,6 +39,13 @@ static ALL = [
 static backgroundMusicInterval;
 
     constructor() {
+        this.checkSounds();
+    }
+
+    checkSounds() {
+        setInterval(() => {
+            
+        }, 200);
     }
 
     static playBackground() {
@@ -56,9 +63,18 @@ static backgroundMusicInterval;
         clearInterval(AudioHub.backgroundMusicInterval);
     }
 
+    //checksthe flag playingMusic in game.js
     static playSoundeffect(sound) {
-        sound.volume = 0.4;
-        sound.play();
+        if (playingMusic) {
+            sound.volume = 0.4;
+            sound.play();
+        }
+        else {
+            sound.pause();
+            sound.volume = 0;
+            sound.currentTime = 0;
+        }
+        
     }
 
     static pauseSoundeffect(sound) {

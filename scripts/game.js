@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameAudio = new AudioHub();
+let playingMusic = false;
 //neni dovoleno, aby na strance rovnou zacala hudba, aniz by user nejdriv nemel nejakou interakci
 //TODO dat default ein mutebutton a na jeho click taky muzu s muzikou zacit, ale pak mi to zacne cely odznova, kdyz zacnu hru?
 
@@ -10,18 +11,18 @@ function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hinter
   }
 
 function startNewGame() {
+    playingMusic = true;
     AudioHub.playBackground();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
-    
     init();
 }
 
 function getHomeScreen(){
+    stopMusic();
+    clearAllIntervals();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getHomeScreenTemplates();
-    clearLevel();
-    clearAllIntervals();
 }
 
 function getImpressumOverlay() {
@@ -45,28 +46,51 @@ function getLossScreen() {
     clearAllIntervals();
 }
 
-
-//das muss in Zukunft nur für das btn auf der startseite sein, falls es nur background music abspielt
-function unmuteMusic() {
- let buttonImage = document.getElementById("soundBtn").querySelector('img');
- buttonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
- AudioHub.BACKGROUND.play();
+//nur für das Homescreenbutton
+function toggleMusicOnHomeScreen() {
+if(!playingMusic) {
+    let buttonImage = document.getElementById("soundBtnHomeScreen").querySelector('img');
+    buttonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
+    AudioHub.playBackground();
+    playingMusic = true;
+}
+else if(playingMusic) {
+    let buttonImage = document.getElementById("soundBtnHomeScreen").querySelector('img');
+    buttonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
+    AudioHub.stopBackground();
+    playingMusic = false;
+}
 }
 
-//a tady z toho udelat toggle, eine if Abfrage einbauen, falls src muted, unmute a obracene
-function muteMusic() {
-    let buttonImage = document.getElementById("soundBtn").querySelector('img');
-    buttonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
-    AudioHub.stopAll();
+function toggleBtnImageInPlayModus() {
+    setInterval(() => {
+        if(!playingMusic) {
+            let buttonImage = document.getElementById("soundBtn").querySelector('img');
+            buttonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
+        }
+        else if (playingMusic) {
+            let buttonImage = document.getElementById("soundBtn").querySelector('img');
+            buttonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
+        }
+    }, 200);
+}
+
+function toggleMusicInPlayModus() {
+    if(!playingMusic) {
+        AudioHub.playBackground();
+        playingMusic = true;
+    }
+    else if (playingMusic) {
+        stopMusic();
+        playingMusic = false;
+    }
 }
 
 function stopMusic() {
     AudioHub.stopAll();
+    //vsechny zvuky se zastavi, ale ja potrebuju, aby se ani nezapinaly, dokud zase nebude dalsi klik
+    playingMusic = false;
 }
-
-
-
-
 
 function init() {   //die bindet unser Canvas an einer Variablen und dann fügen wir das BIld hinzu
     initLevel();
@@ -75,7 +99,7 @@ function init() {   //die bindet unser Canvas an einer Variablen und dann fügen
     world.resetGame();
     console.log("reseting in init");
     //console.log("My Character is", world["character"]);
-    
+    toggleBtnImageInPlayModus();
 }
 
 window.addEventListener('keydown', (event) => {
