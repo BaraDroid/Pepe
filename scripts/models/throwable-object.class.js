@@ -56,7 +56,7 @@ class ThrowableObject extends MovableObject {
     //#####################################################
     throw() {
         if(!this.otherDirection) {
-            console.log("hazi vpravo");
+            //console.log("hazi vpravo");
             this.speedY = 45;
         this.applyGravity();
         setInterval(() => {
@@ -67,7 +67,7 @@ class ThrowableObject extends MovableObject {
         }, 1000 / 15);
         }
         else if (this.otherDirection) {
-            console.log('hazi vlevo');
+            //console.log('hazi vlevo');
             this.speedY = 45;
             this.applyGravity();
             setInterval(() => {

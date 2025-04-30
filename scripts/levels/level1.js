@@ -2,10 +2,12 @@ let cloudX = Math.random()*700;
 let level1;
 
 function clearLevel() {
+  console.log('level cleared!'); //timhle to nebude
   level1 = "";
 }
 
 function initLevel() {
+  console.log("neues level initialisiert");
   level1 = new Level(
     [
         new Chicken(),

@@ -13,7 +13,7 @@ function startNewGame() {
     AudioHub.playBackground();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
-    clearLevel();
+    
     init();
 }
 
@@ -72,8 +72,9 @@ function init() {   //die bindet unser Canvas an einer Variablen und dann fügen
     initLevel();
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
-
-    console.log("My Character is", world["character"]);
+    world.resetGame();
+    console.log("reseting in init");
+    //console.log("My Character is", world["character"]);
     
 }
 

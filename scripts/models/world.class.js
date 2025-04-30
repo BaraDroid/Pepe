@@ -9,6 +9,7 @@ class World {
   keyboard;
   level = level1;
   camera_x = 0; //sonst starten wir in der Mitte
+  static gameOver = false;
 
   //################ character ##########################
   character = new Character();
@@ -35,9 +36,13 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    
     this.draw();
     this.setWorld();
+    this.resetGame();
+    console.log("reseting in World class");
     this.run();
+    
     this.sendNewChicken();
   }
 
@@ -167,7 +172,7 @@ class World {
         obj.y = 500;
         World.collectedBottles++;
         AudioHub.playSoundeffect(AudioHub.BOTTLECOLLECT);
-        console.log(World.collectedBottles);
+        //console.log(World.collectedBottles);
         this.bottleBar.setPercentage(World.collectedBottles);
       }
     });
@@ -232,15 +237,15 @@ class World {
     if (this.keyboard.D && World.collectedBottles > 0) {
       if(!this.character.otherDirection) {
         this.bottle = new ThrowableObject(this.character.x + 50, this.character.y + 110, this.character.otherDirection);
-        console.log('nova lahev doprava');
+        //console.log('nova lahev doprava');
       }
       else if (this.character.otherDirection) {
         this.bottle = new ThrowableObject(this.character.x - 20, this.character.y + 110, this.character.otherDirection);
-        console.log('nova lahev doleva');
+        //console.log('nova lahev doleva');
       }
       this.throwableObjects.push(this.bottle);
       World.collectedBottles--;
-      console.log(World.collectedBottles);
+      //console.log(World.collectedBottles);
       this.bottleBar.setPercentage(World.collectedBottles);
     }
   }
@@ -270,6 +275,19 @@ class World {
       this.level.enemies[3].isAttacking = false;
     }
   }
+
+  resetGame() {
+    console.log("chickenDead is", this.level.enemies.chickenDead);
+    console.log(this.level.enemies[3]);
+    this.level.enemies.chickenDead = false;
+      this.level.enemies[3].chickenDead = false;
+      World.collectedBottles = 0;
+      this.collectedCoins = 0;
+      this.character.energy = 100;
+      this.level.enemies[3].energy = 100;
+      World.gameOver = false;
+      
+    }
 
 
 }

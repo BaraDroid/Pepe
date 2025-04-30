@@ -167,6 +167,9 @@ class MovableObject extends DrawableObject {
                     this.y += 3; //obrazek se zesune z obrazovky pryc
                 }, 1000 / 60);
                 setTimeout(() => {
+                    this.deadAnimationshown = false;
+                    this.chickenDead = false;
+                    console.log("gameover auf true");
                     getWinScreen();
                     AudioHub.stopBackground();
                     AudioHub.playSoundeffect(AudioHub.VICTORY);
