@@ -179,13 +179,11 @@ if(!this.hurtAnimationShown) {
 
 bossDead() {
     AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
-    this.deadAnimationShown = true;
     console.log("there should start endboss dead animation");
     setInterval(() => {
-        this.y += 3; //obrazek se zesune z obrazovky pryc
+        this.y += 3; //Bild schiebt sich weg vom Bildschirm
     }, 1000 / 60);
     setTimeout(() => {
-        this.deadAnimationshown = false;
         this.chickenDead = false;
         getWinScreen();
         AudioHub.stopBackground();

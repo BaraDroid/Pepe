@@ -286,7 +286,8 @@ class World {
       this.character.energy = 100;
       this.level.enemies[3].energy = 100;
       World.gameOver = false;
-      
+      World.chicken.energy = 100;
+      console.log("chicken energy", World.chicken.energy);
     }
 
 
