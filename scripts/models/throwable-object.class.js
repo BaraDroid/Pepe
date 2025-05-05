@@ -111,7 +111,6 @@ class ThrowableObject extends MovableObject {
                 this.speedY = 0;
                 clearInterval(this.gravityId);
                 clearInterval(this.throwIntervalId);
-                //console.log("zastaveni rychlosti", this.x);
             }
         }, 1000 / 80);
 

@@ -1,16 +1,19 @@
 @font-face {
-    font-family: HVD_Comic_Serif_Pro;
+    font-family: 'HVD_Comic_Serif_Pro';
     src: url(../fonts/HVD_Comic_Serif_Pro.otf);
 }
 
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color:rgb(132 9 42);
     background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp);
     background-position: center;
-    font-family: HVD_Comic_Serif_Pro;
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+    font-family: 'HVD_Comic_Serif_Pro';
 }
 
 canvas {
@@ -67,7 +70,7 @@ h1 {
 .play_again_btn {
     height: 60px;
     width: 150px;
-    font-family: HVD_Comic_Serif_Pro;
+    font-family: 'HVD_Comic_Serif_Pro';
     font-size: 20px;
     color: rgb(29 19 22);
     border-radius: 15px;
