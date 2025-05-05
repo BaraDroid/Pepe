@@ -14,6 +14,9 @@ class MovableObject extends DrawableObject {
     accelaration = 1;
     energy = 100;
 
+    //################ interval ##########################
+    gravityId;
+
     //#####################################################
     //################ methods ##########################
     //#####################################################
@@ -39,7 +42,7 @@ class MovableObject extends DrawableObject {
     }
 
     applyGravity() {
-        setInterval(() => {
+        this.gravityId = setInterval(() => {
             if (this.isAboveGround()) {
                 this.y -= this.speedY; //negative Geschwindigkeit = nach unten
                 this.speedY -= this.accelaration;

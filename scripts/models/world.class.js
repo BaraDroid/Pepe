@@ -196,25 +196,44 @@ class World {
         if (bottle.isColliding(enemy)) {
           enemy.hitEnemy(enemy);
           bottle.collapse = true;
+          //console.log("is collapse true?", bottle.collapse);
+          bottle.playCollapseAnimation(bottle.IMAGES_BROKEN);
           AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
-          //console.log("ist collapse true?",bottle.collapse);
+          this.removeThrowableObject(bottle);
+          //ja, jetzt ist Endboss hit nur einmal, dafür bei kleinen sagt das nichts
           this.chickenStatusBar.setPercentage(World.chicken.energy);
           if(enemy instanceof Babychicken || enemy instanceof Chicken) {
             enemy.chickenDead = true;
+            bottle.collapse = true;
+            //console.log("is collapse true?", bottle.collapse);
+            bottle.playCollapseAnimation(bottle.IMAGES_BROKEN);
+            this.removeThrowableObject(bottle);
           }
         }
         else if (!bottle.isColliding(enemy) && bottle.y >= 342 && !bottle.collapse) {
           this.checkCollisionWithGround(bottle);
+          //console.log("is collapse true?", bottle.collapse);
+          this.removeThrowableObject(bottle);
         }
       }
     });
   }
 
+  removeThrowableObject(bottleToRemove) {
+    if(bottleToRemove.canBeRemoved) {
+      const index = this.throwableObjects.indexOf(bottleToRemove);
+      console.log("prvni cast remove funkce");
+      if (index > -1) {
+          this.throwableObjects.splice(index, 1);
+          console.log("druha cast remove funkce");
+      }
+    }
+}
+
   checkCollisionWithGround(flask) {
+    flask.collapse = true;
     AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
     flask.playCollapseAnimation(flask.IMAGES_BROKEN);
-    //console.log('Flasche am boden zerplatzt');
-    flask.collapse = true;
   }
 
   checkCollisionFromJump() {

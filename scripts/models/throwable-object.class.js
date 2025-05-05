@@ -13,6 +13,7 @@ class ThrowableObject extends MovableObject {
     brokenBottle = false;
     brokenAnimationShown = false;
     brokenAnimationCounter = 0;
+    canBeRemoved = false;
 
     offset = {
         top: 10,
@@ -20,6 +21,9 @@ class ThrowableObject extends MovableObject {
         left: 20,
         right: 40,
     };
+
+    //################ intervale ##########################
+    throwIntervalId;
 
     //################ images ##########################
     IMAGES_THROWN = [
@@ -55,30 +59,31 @@ class ThrowableObject extends MovableObject {
     //################ methods ##########################
     //#####################################################
     throw() {
-        if(!this.otherDirection) {
+        if (!this.otherDirection) {
             //console.log("hazi vpravo");
             this.speedY = 45;
-        this.applyGravity();
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_THROWN);
-            this.x += 25;
-            this.brokenAnimationShown = false;
-            this.brokenAnimationCounter = 0;
-        }, 1000 / 15);
+            this.applyGravity();
+            this.throwIntervalId = setInterval(() => {
+                this.playAnimation(this.IMAGES_THROWN);
+                this.x += 25;
+                this.brokenAnimationShown = false;
+                this.brokenAnimationCounter = 0;
+            }, 1000 / 15);
         }
         else if (this.otherDirection) {
             //console.log('hazi vlevo');
             this.speedY = 45;
             this.applyGravity();
-            setInterval(() => {
+            this.throwIntervalId = setInterval(() => {
                 this.playAnimation(this.IMAGES_THROWN);
                 this.x -= 25;
                 this.brokenAnimationShown = false;
                 this.brokenAnimationCounter = 0;
             }, 1000 / 15);
         }
-        
+
     }
+
 
     // animateCollapse() {
     //     setInterval(() => {
@@ -102,6 +107,11 @@ class ThrowableObject extends MovableObject {
             if (this.collapse) {
                 this.brokenBottle = true;
                 this.acceleration = 0;
+                this.x += 0;
+                this.speedY = 0;
+                clearInterval(this.gravityId);
+                clearInterval(this.throwIntervalId);
+                //console.log("zastaveni rychlosti", this.x);
             }
         }, 1000 / 80);
 
@@ -119,7 +129,7 @@ class ThrowableObject extends MovableObject {
 
     // playCollapseAnimation(brokenImages) {
     //     if(!this.brokenAnimationShown) {
-            
+
     //         this.playAnimation(brokenImages); 
     //         this.brokenAnimationCounter++
     //         //console.log("brokenAnimationCOunter in der play methode", this.brokenAnimationCounter); //der geht nicht über eins
@@ -131,6 +141,8 @@ class ThrowableObject extends MovableObject {
     //         }
     //     }
 
+
+    //v tyhle metode musim zastavit pad
     playCollapseAnimation(brokenImages) {
         if (!this.brokenAnimationShown) {
             this.playAnimation(brokenImages);
@@ -139,6 +151,7 @@ class ThrowableObject extends MovableObject {
                 this.brokenBottle = false;
                 this.brokenAnimationShown = true;
                 this.collapse = false; // Setze collapse zurück, falls nötig
+                this.canBeRemoved = true;
             }
         }
     }
