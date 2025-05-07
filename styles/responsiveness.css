@@ -27,10 +27,11 @@
 
 #rotateMessage {
     position: absolute;
-    margin: auto;
     white-space: nowrap;
+    margin-top: 20dvh;
     width: auto;
     display: none;
+    z-index: 100;
 }
 
 @media (max-width: 800px) {
@@ -124,5 +125,6 @@
 /* smartphones in portrait orientation */
 @media (orientation: portrait) and (hover: none) {
     #rotateMessage {display: block;}
+    .overlay_startgame {filter: blur(5px);}
     h1 {display: flex; text-align: center;}
 }

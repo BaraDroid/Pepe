@@ -58,6 +58,10 @@ function getHomeScreenTemplates(){
         </div>
 
         <div class="icons"></div>
+    </div>
+    </div>
+    <div class="icon_button" id="rotateMessage">
+        Please rotate your device!
     </div>`;
 }
 
@@ -76,9 +80,6 @@ function getCanvasTemplate(){
         <button class="icon_button" onclick="getFullScreenMode()">
             <img src="./img_pollo_locco/icons/fullscreen_icon.png" alt="full screen modus icon">
         </button>
-    </div>
-    <div class="icon_button" id="rotateMessage">
-        Please rotate your device!
     </div>
     <button class="icon_button" id="muteBtn" onclick="toggleBtnImageInPlayModus(); toggleMusicInPlayModus()">
         <img src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">
