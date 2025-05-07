@@ -49,7 +49,7 @@ class Bottlesbar extends StatusBar {
         else if (percent >= 42) {
             return 2;
         }
-        else if (percent >= 21) {
+        else if (percent >= 0) {
             return 1;
         }
         else {

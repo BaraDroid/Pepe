@@ -33,10 +33,6 @@
     display: none;
 }
 
-@media (orientation: portrait) and (hover: none) {
-    #rotateMessage {display: block;}
-}
-
 @media (max-width: 800px) {
     .instructions {
         height: 61dvh;
@@ -61,6 +57,7 @@
     #panelLeft {display: flex; left: 2%;}
     #panelRight {display: flex; right: 2%;}
     #muteBtn {display: block;}
+    h1 {display: none;}
 }
 
 @media only screen and (max-width: 720px) {
@@ -69,7 +66,6 @@
         border: unset;
         border-radius: 0;
     }
-    h1 {display: none;}
     .instructions {height: 100%;}
     .overlay_wingame {
         background-size: 100% auto; 
@@ -123,4 +119,10 @@
         height: auto;
         overflow-y: auto;
     }
+}
+
+/* smartphones in portrait orientation */
+@media (orientation: portrait) and (hover: none) {
+    #rotateMessage {display: block;}
+    h1 {display: flex; text-align: center;}
 }
