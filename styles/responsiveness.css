@@ -19,7 +19,7 @@
 
 #muteBtn {
     position: absolute;
-    bottom: 8px;
+    top: 8px;
     left: 8px;
     display: none;
     >img {height: 20px;}
@@ -51,15 +51,7 @@
     .information {flex-direction: column; gap: 8px;}
 }
 
-/* Smartphones ---------*/
-@media (pointer: coarse) and (hover: none) {
-    .instructions {overflow-y: auto;}
-    .control_icons {display: none;}
-    #panelLeft {display: flex; left: 2%;}
-    #panelRight {display: flex; right: 2%;}
-    #muteBtn {display: block;}
-    h1 {display: none;}
-}
+
 
 @media only screen and (max-width: 720px) {
     canvas {
@@ -107,12 +99,13 @@
 
 @media only screen and (max-height: 480px) {
     canvas {
-        height: 100dvh;
+        max-height: 100dvh;
+        border: unset;
     }
 }
 
 @media (min-height: 481px) {
-    body {    display: flex; /* Aktiviere Flexbox für den body */
+    body {display: flex; /* Aktiviere Flexbox für den body */
         flex-direction: column; /* Ordne die Elemente vertikal an */
         align-items: center; /* Horizontale Zentrierung der Elemente */
         justify-content: center; /* Vertikale Zentrierung der Elemente */
@@ -120,6 +113,23 @@
         height: auto;
         overflow-y: auto;
     }
+}
+
+/* Smartphones ---------*/
+@media (pointer: coarse) and (hover: none) {
+    .instructions {height: auto;}
+    .control_icons {display: none;}
+    #panelLeft {display: flex; left: 2%;}
+    #panelRight {display: flex; right: 2%;}
+    #muteBtn {display: block;}
+    h1 {display: none;}
+    .play_again_btn {margin-top: 17dvh;}
+    .game_description, .emphasise, span, .spacebar, .d {font-size: 16px;}
+    .move {gap: 8px;}
+    #startGameBtn {font-size: 18px; height: auto; width: auto; padding: 8px;}
+    .jump, .throw {gap: 8px;}
+    .information {flex-direction: column; gap: 8px;}
+    .overlay_startgame {overflow-y: auto;}
 }
 
 /* smartphones in portrait orientation */

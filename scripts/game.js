@@ -2,7 +2,6 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameAudio = new AudioHub();
-let playingMusic = false;
 let fullScreen = false;
 //neni dovoleno, aby na strance rovnou zacala hudba, aniz by user nejdriv nemel nejakou interakci
 //TODO dat default ein mutebutton a na jeho click taky muzu s muzikou zacit, ale pak mi to zacne cely odznova, kdyz zacnu hru?
@@ -23,6 +22,7 @@ function startNewGame() {
     world.resetGame();
     console.log("reseting in init");
     //console.log("My Character is", world["character"]);
+    checkMuteAtStart();
     toggleBtnImageInPlayModus();
     initMobileButtons();
 }
@@ -69,31 +69,16 @@ function getLossScreen() {
     clearAllIntervals();
 }
 
-//nur für das Homescreenbutton
-function toggleMusicOnHomeScreen() {
-if(!playingMusic) {
-    let buttonImage = document.getElementById("soundBtnHomeScreen").querySelector('img');
-    buttonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
-    AudioHub.playBackground();
-    playingMusic = true;
-}
-else if(playingMusic) {
-    let buttonImage = document.getElementById("soundBtnHomeScreen").querySelector('img');
-    buttonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
-    AudioHub.stopBackground();
-    playingMusic = false;
-}
-}
-
 function toggleBtnImageInPlayModus() {
     setInterval(() => {
-        if(!playingMusic) {
+        let mutedState = localStorage.getItem("muted");
+        if(mutedState == "yes") {
             let bigButtonImage = document.getElementById("soundBtn").querySelector('img');
             let smallButtonImage = document.getElementById("muteBtn").querySelector('img');
             bigButtonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
             smallButtonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
         }
-        else if (playingMusic) {
+        else if (mutedState == "no") {
             let bigButtonImage = document.getElementById("soundBtn").querySelector('img');
             let smallButtonImage = document.getElementById("muteBtn").querySelector('img');
             bigButtonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
@@ -102,21 +87,31 @@ function toggleBtnImageInPlayModus() {
     }, 200);
 }
 
-function toggleMusicInPlayModus() {
-    if(!playingMusic) {
-        AudioHub.playBackground();
-        playingMusic = true;
-    }
-    else if (playingMusic) {
+function checkMuteAtStart() {
+    let mutedState = localStorage.getItem("muted");
+    if (mutedState == "yes") {
         stopMusic();
-        playingMusic = false;
+    }
+    if (mutedState == "no") {
+        AudioHub.playBackground();
+    }
+}
+
+function toggleMusicInPlayModus() {
+    let mutedState = localStorage.getItem("muted");
+    if(mutedState == "yes") {
+        AudioHub.playBackground();
+        console.log("musik soll stoppen");
+        localStorage.setItem("muted", "no");
+    }
+    else if (mutedState == "no") {
+        stopMusic();
+        localStorage.setItem("muted", "yes");
     }
 }
 
 function stopMusic() {
     AudioHub.stopAll();
-    //vsechny zvuky se zastavi, ale ja potrebuju, aby se ani nezapinaly, dokud zase nebude dalsi klik
-    playingMusic = false;
 }
 
 window.addEventListener('keydown', (event) => {

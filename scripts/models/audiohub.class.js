@@ -39,14 +39,14 @@ static ALL = [
 static backgroundMusicInterval;
 
     constructor() {
-        this.checkSounds();
+        //this.checkSounds();
     }
 
-    checkSounds() {
-        setInterval(() => {
+    // checkSounds() {
+    //     setInterval(() => {
             
-        }, 200);
-    }
+    //     }, 200);
+    // }
 
     static playBackground() {
         AudioHub.backgroundMusicInterval = setInterval(() => {
@@ -65,7 +65,8 @@ static backgroundMusicInterval;
 
     //checksthe flag playingMusic in game.js
     static playSoundeffect(sound) {
-        if (playingMusic) {
+        let mutedState = localStorage.getItem("muted");
+        if (mutedState == "no") {
             sound.volume = 0.4;
             sound.play();
         }
