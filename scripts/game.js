@@ -15,8 +15,30 @@ function startNewGame() {
     AudioHub.playBackground();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
-    init();
+    //init(); tu funkci jsem prekopirovala pod to
+    initLevel();
+    canvas = document.getElementById("canvas");
+    world = new World(canvas, keyboard);
+    world.resetGame();
+    console.log("reseting in init");
+    //console.log("My Character is", world["character"]);
+    toggleBtnImageInPlayModus();
+    initMobileButtons();
 }
+
+//gemini vorschlag
+// function startNewGame() {
+//     playingMusic = true;
+//     AudioHub.playBackground();
+//     document.getElementById("myBody").innerHTML = getCanvasTemplate();
+//     const canvasElement = document.getElementById("canvas"); // Canvas-Element jetzt holen
+//     world = new World(canvasElement, keyboard);       // World instanziieren, nachdem Canvas existiert
+//     initLevel();
+//     world.resetGame();
+//     console.log("reseting in init");
+//     toggleBtnImageInPlayModus();
+//     initMobileButtons();
+// }
 
 function getHomeScreen(){
     stopMusic();
@@ -92,16 +114,16 @@ function stopMusic() {
     playingMusic = false;
 }
 
-function init() {   //die bindet unser Canvas an einer Variablen und dann fügen wir das BIld hinzu
-    initLevel();
-    canvas = document.getElementById("canvas");
-    world = new World(canvas, keyboard);
-    world.resetGame();
-    console.log("reseting in init");
-    //console.log("My Character is", world["character"]);
-    toggleBtnImageInPlayModus();
-    initMobileButtons();
-}
+// function init() {   //die bindet unser Canvas an einer Variablen und dann fügen wir das BIld hinzu
+//     initLevel();
+//     canvas = document.getElementById("canvas");
+//     world = new World(canvas, keyboard);
+//     world.resetGame();
+//     console.log("reseting in init");
+//     //console.log("My Character is", world["character"]);
+//     toggleBtnImageInPlayModus();
+//     initMobileButtons();
+// }
 
 window.addEventListener('keydown', (event) => {
     if (event.keyCode == 32) {
@@ -152,7 +174,7 @@ function initMobileButtons() {
     addTouchListener('btnThrow', 'D', true);
 }
 
-window.addEventListener('load', init);
+//window.addEventListener('load', init);
 
 window.addEventListener('keyup', (event) => {
     if (event.keyCode == 39) keyboard.RIGHT = false;
