@@ -25,8 +25,16 @@
     >img {height: 20px;}
 }
 
-@media (max-width: 950px) {
-    .instructions {overflow-y: auto;}
+#rotateMessage {
+    position: absolute;
+    margin: auto;
+    white-space: nowrap;
+    width: auto;
+    display: none;
+}
+
+@media (orientation: portrait) and (hover: none) {
+    #rotateMessage {display: block;}
 }
 
 @media (max-width: 800px) {
@@ -47,6 +55,14 @@
 }
 
 /* Smartphones ---------*/
+@media (pointer: coarse) and (hover: none) {
+    .instructions {overflow-y: auto;}
+    .control_icons {display: none;}
+    #panelLeft {display: flex; left: 2%;}
+    #panelRight {display: flex; right: 2%;}
+    #muteBtn {display: block;}
+}
+
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
@@ -54,10 +70,6 @@
         border-radius: 0;
     }
     h1 {display: none;}
-    .control_icons {display: none;}
-    #panelLeft {display: flex; left: 2%;}
-    #panelRight {display: flex; right: 2%;}
-    #muteBtn {display: block;}
     .instructions {height: 100%;}
     .overlay_wingame {
         background-size: 100% auto; 
