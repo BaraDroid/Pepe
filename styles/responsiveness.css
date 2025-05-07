@@ -17,6 +17,26 @@
     display: none;
 }
 
+@media (max-width: 950px) {
+    .instructions {overflow-y: auto;}
+}
+
+@media (max-width: 800px) {
+    .instructions {
+        height: 61dvh;
+        width: 91%;
+    }
+    #impressum {margin: 0;}
+    .information {gap: 0;}
+}
+
+@media (max-width: 500px) {
+    .game_description, .emphasise, span, .spacebar, .d {font-size: 16px;}
+    .move {gap: 8px;}
+    #startGameBtn {font-size: 18px; height: auto; width: auto; padding: 8px;}
+    .jump, .throw {gap: 8px;}
+    .information {flex-direction: column; gap: 8px;}
+}
 
 /* Smartphones ---------*/
 @media only screen and (max-width: 720px) {
@@ -29,10 +49,57 @@
     .control_icons {display: none;}
     #panelLeft {display: flex; left: 2%;}
     #panelRight {display: flex; right: 2%;}
+    .instructions {height: 100%;}
+    .overlay_wingame {
+        background-size: 100% auto; 
+        background-repeat: no-repeat;
+        background-color: rgb(132 9 42);
+    }
+    #playAgainWin {margin-bottom: 0;}
+    .overlay_lostgame {
+        background-size: 100% auto; 
+        background-repeat: no-repeat;
+        background-color: black;
+    }
+    .play_again_btn {margin-top: 27dvh;}
+}
+
+@media(max-width: 520px) {
+    .play_again_btn {margin-top: 21dvh;}
+}
+
+@media (max-width: 450px) {
+    .play_again_btn {
+        font-size: 16px;
+        height: auto;
+        width: auto;
+        padding: 8px;
+        margin-top: 18dvh;
+    }
+}
+
+@media (max-width: 400px) {
+    .main {flex-direction: column;}
+    .main_left, .main_right {width: 100%; height: auto; padding: 8px;}
+}
+
+@media (max-width: 395px) {
+    .play_again_btn {margin-top: 17dvh;}
 }
 
 @media only screen and (max-height: 480px) {
     canvas {
         height: 100dvh;
+    }
+}
+
+@media (min-height: 481px) {
+    body {    display: flex; /* Aktiviere Flexbox für den body */
+        flex-direction: column; /* Ordne die Elemente vertikal an */
+        align-items: center; /* Horizontale Zentrierung der Elemente */
+        justify-content: center; /* Vertikale Zentrierung der Elemente */
+        min-height: 100dvh; /* Stelle sicher, dass der body die volle Höhe einnimmt */
+        height: auto;
+        overflow-y: auto;
     }
 }

@@ -100,6 +100,7 @@ function init() {   //die bindet unser Canvas an einer Variablen und dann fügen
     console.log("reseting in init");
     //console.log("My Character is", world["character"]);
     toggleBtnImageInPlayModus();
+    initMobileButtons();
 }
 
 window.addEventListener('keydown', (event) => {
@@ -143,5 +144,32 @@ window.addEventListener('keyup', (event) => {
         keyboard.D = false;
     }
 });
+
+function initMobileButtons() {
+    addTouchListener('btnMoveLeft', 'LEFT', true);
+    addTouchListener('btnJump', 'SPACE', true);
+    addTouchListener('btnMoveRight', 'RIGHT', true);
+    addTouchListener('btnThrow', 'D', true);
+}
+
+window.addEventListener('load', init);
+
+window.addEventListener('keyup', (event) => {
+    if (event.keyCode == 39) keyboard.RIGHT = false;
+    if (event.keyCode == 37) keyboard.LEFT = false;
+    if (event.keyCode == 38) keyboard.UP = false;
+    if (event.keyCode == 40) keyboard.DOWN = false;
+    if (event.keyCode == 32) keyboard.SPACE = false;
+    if (event.keyCode == 77) keyboard.M = false;
+    if (event.keyCode == 78) keyboard.N = false;
+});
+
+function addTouchListener(id, prop, onVal, offVal) {
+    const btn = document.getElementById(id);
+    if (btn) {
+        btn.addEventListener('touchstart', e => { e.preventDefault(); keyboard[prop] = onVal; });
+        btn.addEventListener('touchend', e => { e.preventDefault(); keyboard[prop] = offVal; });
+    }
+}
 
 

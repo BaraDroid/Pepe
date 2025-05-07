@@ -58,7 +58,7 @@ h1 {
     left: 0;
     bottom: 0;
     height: 100dvh;
-    width: 100vw;
+    width: 100%;
     background-image: url(../img_pollo_locco/img/bg_images/win_screen.webp);
     background-size: cover;
     background-position: center;
