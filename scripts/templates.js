@@ -13,7 +13,7 @@ function getWonScreenTemplate(){
 function getHomeScreenTemplates(){
     return `<div class="overlay_startgame" id="startGame">
         <h1>El pollo ¡LOCO!</h1>
-        <div class="instructions">
+        <div class="instructions" id="homeScreen">
             <span class="game_description">
                 Help the main character, Pepe, win the battle against the chicken army and save the world from the GIANT CHICKEN.
                 <br>Smaller chickens can be defeated either by jumping on them or by throwing a well-aimed bottle of fiery salsa, which you collect throw the game by touch, same as the coins. 
@@ -58,17 +58,6 @@ function getHomeScreenTemplates(){
         </div>
 
         <div class="icons"></div>
-    </div>
-    <div class="control_icons">
-        <button class="icon_button" id="soundBtnHomeScreen" onclick="toggleMusicOnHomeScreen()" >
-            <img src="./img_pollo_locco/icons/sound_muted_icon.png" alt="sound muted icon">
-        </button>
-        <button class="icon_button" onclick="getHomeScreen()">
-            <img src="./img_pollo_locco/icons/homescreen_icon.png" alt="homescreen icon">
-        </button>
-        <button class="icon_button">
-            <img src="./img_pollo_locco/icons/fullscreen_icon.png" alt="full screen modus icon">
-        </button>
     </div>`;
 }
 
@@ -84,7 +73,7 @@ function getCanvasTemplate(){
         <button class="icon_button" onclick="getHomeScreen()">
             <img src="./img_pollo_locco/icons/homescreen_icon.png" alt="homescreen icon">
         </button>
-        <button class="icon_button">
+        <button class="icon_button" onclick="getFullScreenMode()">
             <img src="./img_pollo_locco/icons/fullscreen_icon.png" alt="full screen modus icon">
         </button>
     </div>

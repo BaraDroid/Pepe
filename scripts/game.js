@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let gameAudio = new AudioHub();
 let playingMusic = false;
+let fullScreen = false;
 //neni dovoleno, aby na strance rovnou zacala hudba, aniz by user nejdriv nemel nejakou interakci
 //TODO dat default ein mutebutton a na jeho click taky muzu s muzikou zacit, ale pak mi to zacne cely odznova, kdyz zacnu hru?
 
@@ -114,17 +115,6 @@ function stopMusic() {
     playingMusic = false;
 }
 
-// function init() {   //die bindet unser Canvas an einer Variablen und dann fügen wir das BIld hinzu
-//     initLevel();
-//     canvas = document.getElementById("canvas");
-//     world = new World(canvas, keyboard);
-//     world.resetGame();
-//     console.log("reseting in init");
-//     //console.log("My Character is", world["character"]);
-//     toggleBtnImageInPlayModus();
-//     initMobileButtons();
-// }
-
 window.addEventListener('keydown', (event) => {
     if (event.keyCode == 32) {
         keyboard.SPACE = true;
@@ -194,4 +184,8 @@ function addTouchListener(id, prop, onVal, offVal) {
     }
 }
 
-
+function getFullScreenMode() {
+    let canvas = document.getElementById("canvas");
+    canvas.requestFullscreen();
+    fullScreen = true;
+}
