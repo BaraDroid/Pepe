@@ -88,12 +88,16 @@ else if(playingMusic) {
 function toggleBtnImageInPlayModus() {
     setInterval(() => {
         if(!playingMusic) {
-            let buttonImage = document.getElementById("soundBtn").querySelector('img');
-            buttonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
+            let bigButtonImage = document.getElementById("soundBtn").querySelector('img');
+            let smallButtonImage = document.getElementById("muteBtn").querySelector('img');
+            bigButtonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
+            smallButtonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
         }
         else if (playingMusic) {
-            let buttonImage = document.getElementById("soundBtn").querySelector('img');
-            buttonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
+            let bigButtonImage = document.getElementById("soundBtn").querySelector('img');
+            let smallButtonImage = document.getElementById("muteBtn").querySelector('img');
+            bigButtonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
+            smallButtonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
         }
     }, 200);
 }

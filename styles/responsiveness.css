@@ -17,6 +17,14 @@
     display: none;
 }
 
+#muteBtn {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    display: none;
+    >img {height: 20px;}
+}
+
 @media (max-width: 950px) {
     .instructions {overflow-y: auto;}
 }
@@ -49,6 +57,7 @@
     .control_icons {display: none;}
     #panelLeft {display: flex; left: 2%;}
     #panelRight {display: flex; right: 2%;}
+    #muteBtn {display: block;}
     .instructions {height: 100%;}
     .overlay_wingame {
         background-size: 100% auto; 

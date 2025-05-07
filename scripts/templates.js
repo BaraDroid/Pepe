@@ -77,6 +77,9 @@ function getCanvasTemplate(){
             <img src="./img_pollo_locco/icons/fullscreen_icon.png" alt="full screen modus icon">
         </button>
     </div>
+    <button class="icon_button" id="muteBtn" onclick="toggleBtnImageInPlayModus(); toggleMusicInPlayModus()">
+        <img src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">
+    </button>
     <div class="btn_panel" id="panelLeft">
         <button class="icon_button" id="btnMoveRight">></button>
         <button class="icon_button" id="btnMoveLeft"><</button>
