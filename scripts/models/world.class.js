@@ -1,87 +1,191 @@
+/**
+ * Represents the game world, managing all game objects, rendering, and game logic.
+ */
 class World {
-  //#####################################################
-  //################ attributes ##########################
-  //#####################################################
-
-  //################ world ##########################
+  /**
+   * The HTML canvas element for rendering the game.
+   * @type {HTMLCanvasElement}
+   */
   canvas;
+
+  /**
+   * The 2D rendering context of the canvas.
+   * @type {CanvasRenderingContext2D}
+   */
   ctx;
+
+  /**
+   * The keyboard input handler.
+   * @type {Keyboard}
+   */
   keyboard;
+
+  /**
+   * The current level of the game.
+   * @type {Level}
+   */
   level = level1;
+
+  /**
+   * The horizontal offset of the camera in the game world.
+   * @type {number}
+   */
   camera_x = 0; //sonst starten wir in der Mitte
+
+  /**
+   * A static flag indicating if the game is over.
+   * @type {boolean}
+   */
   static gameOver = false;
 
-  //################ character ##########################
+  /**
+   * The main player character.
+   * @type {Character}
+   */
   character = new Character();
-  static collectedBottles = 0; //TODO warum ist hier static und collected coins nicht?
+
+  /**
+   * A static counter for the number of collected bottles.
+   * @type {number}
+   */
+  static collectedBottles = 0;
+
+  /**
+   * The number of coins collected by the character.
+   * @type {number}
+   */
   collectedCoins = 0;
+
+  /**
+   * An array of collectable objects in the level.
+   * @type {Array<CollectableObject>}
+   */
   collectableObjects;
+
+  /**
+   * An array of coin objects in the level.
+   * @type {Array<Coin>}
+   */
   coins;
 
-  //################ enemy ##########################
+  /**
+   * A static instance of a chicken enemy (likely the initial boss).
+   * @type {Chicken}
+   */
   static chicken = new Chicken();
+
+  /**
+   * The currently thrown bottle object.
+   * @type {ThrowableObject|undefined}
+   */
   bottle;
+
+  /**
+   * An array of throwable bottle objects currently in the game world.
+   * @type {Array<ThrowableObject>}
+   */
   throwableObjects = [];
 
-  //################ statuses ##########################
+  /**
+   * The status bar for the character's health.
+   * @type {StatusBar}
+   */
   statusBar = new StatusBar();
+
+  /**
+   * The status bar for the collected coins.
+   * @type {Coinsbar}
+   */
   coinBar = new Coinsbar();
+
+  /**
+   * The status bar for the collected bottles.
+   * @type {Bottlesbar}
+   */
   bottleBar = new Bottlesbar();
+
+  /**
+   * The status bar for the chicken boss's health.
+   * @type {Chickenstatus}
+   */
   chickenStatusBar = new Chickenstatus();
 
-  //#####################################################
-  //################ constructor ##########################
-  //#####################################################
+  /**
+   * Creates a new World instance, initializes the canvas and keyboard,
+   * sets up the game, and starts the game loop and enemy spawning.
+   * @param {HTMLCanvasElement} canvas - The canvas element to render on.
+   * @param {Keyboard} keyboard - The keyboard input handler.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    
     this.draw();
     this.setWorld();
     this.resetGame();
-    console.log("reseting in World class");
     this.run();
-    
-    this.sendNewChicken();
+    this.sendNewEnemies();
   }
 
-  //#####################################################
-  //################ methods ##########################
-  //#####################################################
-
-  //################ drawings ##########################
+  /**
+   * Sets the world property for the character, providing a reference to this World instance.
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * Clears the canvas, applies camera transformations, draws all game elements,
+   * resets camera transformations, and requests the next animation frame.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToMap(this.level.backgroundObjects);
-    this.addObjectsToMap(this.level.clouds);
-    this.addObjectsToMap(this.throwableObjects);
-    this.addObjectsToMap(this.level.collectableObjects);
-    this.addObjectsToMap(this.level.coins);
+    this.addObjects();
     this.ctx.translate(-this.camera_x, 0); //moves camera with character
-    //-------space for fixed objects:--------
-    this.addToMap(this.chickenStatusBar);
-    this.addToMap(this.statusBar);
-    this.addToMap(this.coinBar);
-    this.addToMap(this.bottleBar);
+    this.addIndicators();
     this.ctx.translate(this.camera_x, 0);
-
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
-
     this.ctx.translate(-this.camera_x, 0);
-
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
   }
 
+  /**
+   * Adds all non-fixed game objects to the map for rendering.
+   */
+  addObjects() {
+    this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.clouds);
+    this.addObjectsToMap(this.throwableObjects);
+    this.addObjectsToMap(this.level.collectableObjects);
+    this.addObjectsToMap(this.level.coins);
+  }
+
+  /**
+   * Adds the fixed GUI indicators (status bars) to the map for rendering.
+   */
+  addIndicators() {
+    this.addToMap(this.chickenStatusBar);
+    this.addToMap(this.statusBar);
+    this.addToMap(this.coinBar);
+    this.addToMap(this.bottleBar);
+  }
+
+  /**
+   * Placeholder for adding additional figures to the map (currently empty).
+   */
+  addFigures() {
+
+  }
+
+  /**
+   * Adds a single movable object to the canvas for drawing, handling mirroring if necessary.
+   * @param {MovableObject} movObj - The movable object to add to the map.
+   */
   addToMap(movObj) {
     if (movObj.otherDirection) {  //wir checking das flagg otherDirection, welcher hat Pepe //TODO throwing hat auch so ein flag und dreht mit
       this.flipImage(movObj);
@@ -97,12 +201,20 @@ class World {
     }
   }
 
+  /**
+   * Adds an array of movable objects to the map for drawing.
+   * @param {Array<MovableObject>} objects - An array of movable objects to add.
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * Flips the image of a movable object horizontally.
+   * @param {MovableObject} movObj - The movable object whose image should be flipped.
+   */
   flipImage(movObj) {
     this.ctx.save(); //erstmal speichern wir das aktuelle Kontext = die eingefüten Bilder
     this.ctx.translate(movObj.width, 0); //wir verändern die Methode, wie wir die Bilder einfügen
@@ -110,12 +222,18 @@ class World {
     movObj.x = movObj.x * -1; //sonst fängt die x koordinate auch gespiegelt - also auf anderer Seite und Bild wird versetzt //also drehen wir das mithilfe von -1, unten das gleiche, damit geben wir das zurück
   }
 
+  /**
+   * Reverses the horizontal flip of a movable object's image.
+   * @param {MovableObject} movObj - The movable object whose image should be flipped back.
+   */
   flipImageBack(movObj) {
     movObj.x = movObj.x * -1;
-    this.ctx.restore(); //wenn das wahr ist, dass wir das Kontext verändert haben, ändern wir das wieder zu dem ursprünglichem Wert
+    this.ctx.restore();
   }
 
-  //################ intervals ##########################
+  /**
+   * Sets up the main game loop intervals for checking collisions and game states.
+   */
   run() {
     setInterval(() => {
       this.checkCollisions(); //check, if an enemy touch Pepe
@@ -130,17 +248,30 @@ class World {
     }, 1000 / 80);
   }
 
-  sendNewChicken() {  //TODO warum ist das nicht bei chickens/babychickens?-weil dort kann ich nicht auf level greifen
-    //nach 6 Sekunden werden neue Chicken freigelassen
+  /**
+   * Initiates the spawning of new enemies in the level.
+   */
+  sendNewEnemies() {
+    this.sendChicken();
+    this.sendBabychicken();
+  }
+
+  /**
+   * Sets up an interval to periodically spawn new chicken enemies.
+   */
+  sendChicken() {
     setInterval(() => {
       let newX = Level.level_end_x + 500 + 720 * Math.random();
       let newChicken = new Chicken();
       newChicken.x = newX;
       this.level.enemies.push(newChicken);
-      //console.log("new chicken created");
-      //tady proste do toho arraye v levelu 1 musim nacpat dalsi tri novy chicken. Jen nevim, jak ho ansprechen!
-      //a taky bych chtela, aby tady zacinali az vzadu, jinak muzu "obejit" misto jejich zrodu
     }, 500);
+  }
+
+  /**
+   * Sets up an interval to periodically spawn new baby chicken enemies.
+   */
+  sendBabychicken() {
     setInterval(() => {
       let newX = Level.level_end_x;
       let newBabychicken = new Babychicken();
@@ -149,7 +280,9 @@ class World {
     }, 2000);
   }
 
-  //################ collisions ##########################
+  /**
+   * Checks for collisions between the character and enemies, handling damage and hurt animation.
+   */
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (
@@ -157,27 +290,30 @@ class World {
         this.character.y > 146 &&
         enemy.chickenDead == false
       ) {
-        //console.log('Collision with', enemy);
         this.character.hit(enemy);
         this.character.isHurt();
-        //console.log(this.character.energy);
         this.statusBar.setPercentage(this.character.energy);
       }
     });
   }
 
+  /**
+   * Checks for collisions between the character and collectable bottles, updating the bottle count and status bar.
+   */
   checkCollisionsWithCollectableBottles() {
     this.level.collectableObjects.forEach((obj) => {
       if (this.character.isColliding(obj)) {
         obj.y = 500;
         World.collectedBottles++;
         AudioHub.playSoundeffect(AudioHub.BOTTLECOLLECT);
-        //console.log(World.collectedBottles);
         this.bottleBar.setPercentage(World.collectedBottles);
       }
     });
   }
 
+  /**
+   * Checks for collisions between the character and coins, updating the coin count and status bar.
+   */
   checkCollisionsWithCoins() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
@@ -189,53 +325,70 @@ class World {
     });
   }
 
+  /**
+   * Checks for collisions between throwable bottles and enemies.
+   */
   checkCollisionsWithThrowableBottles() {
     this.throwableObjects.forEach((bottle) => {
       for (let index = 0; index < this.level.enemies.length; index++) {
         const enemy = this.level.enemies[index];
         if (bottle.isColliding(enemy)) {
-          enemy.hitEnemy(enemy);
-          bottle.collapse = true;
-          //console.log("is collapse true?", bottle.collapse);
-          bottle.playCollapseAnimation(bottle.IMAGES_BROKEN);
-          AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
-          this.removeThrowableObject(bottle);
-          //ja, jetzt ist Endboss hit nur einmal, dafür bei kleinen sagt das nichts
-          this.chickenStatusBar.setPercentage(World.chicken.energy);
-          if(enemy instanceof Babychicken || enemy instanceof Chicken) {
-            enemy.chickenDead = true;
-            bottle.collapse = true;
-            //console.log("is collapse true?", bottle.collapse);
-            bottle.playCollapseAnimation(bottle.IMAGES_BROKEN);
-            this.removeThrowableObject(bottle);
-          }
+          this.bottleHitEnemy(bottle, enemy);
         }
         else if (!bottle.isColliding(enemy) && bottle.y >= 342 && !bottle.collapse) {
           this.checkCollisionWithGround(bottle);
-          //console.log("is collapse true?", bottle.collapse);
           this.removeThrowableObject(bottle);
         }
       }
     });
   }
 
+  /**
+   * Handles the event when a throwable bottle hits an enemy.
+   * @param {ThrowableObject} flask - The throwable bottle that hit the enemy.
+   * @param {MovableObject} opponent - The enemy that was hit.
+   */
+  bottleHitEnemy(flask, opponent) {
+    opponent.hitEnemy(opponent);
+    flask.collapse = true;
+    flask.animateCollapse();
+    AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
+    this.removeThrowableObject(flask);
+    this.chickenStatusBar.setPercentage(World.chicken.energy);
+    if (opponent instanceof Babychicken || opponent instanceof Chicken) {
+      opponent.chickenDead = true;
+      flask.collapse = true;
+      flask.playCollapseAnimation(flask.IMAGES_BROKEN);
+      this.removeThrowableObject(flask);
+    }
+  }
+
+  /**
+   * Removes a specific throwable object from the `throwableObjects` array if its `canBeRemoved` flag is true.
+   * @param {ThrowableObject} bottleToRemove - The throwable object to remove.
+   */
   removeThrowableObject(bottleToRemove) {
-    if(bottleToRemove.canBeRemoved) {
+    if (bottleToRemove.canBeRemoved) {
       const index = this.throwableObjects.indexOf(bottleToRemove);
-      console.log("prvni cast remove funkce");
       if (index > -1) {
-          this.throwableObjects.splice(index, 1);
-          console.log("druha cast remove funkce");
+        this.throwableObjects.splice(index, 1);
       }
     }
-}
+  }
 
+  /**
+   * Handles the collision of a throwable bottle with the ground.
+   * @param {ThrowableObject} flask - The throwable bottle that hit the ground.
+   */
   checkCollisionWithGround(flask) {
     flask.collapse = true;
     AudioHub.playSoundeffect(AudioHub.BOTTLETHROW);
-    flask.playCollapseAnimation(flask.IMAGES_BROKEN);
+    flask.animateCollapse();
   }
 
+  /**
+   * Checks if the character jumps on a chicken or baby chicken enemy, marking them as dead.
+   */
   checkCollisionFromJump() {
     // Überprüfen, ob das 'enemy' ein Chicken oder Babychicken ist, da Endboss nicht mit Sprung besiegbar ist
     this.level.enemies.forEach((enemy) => {
@@ -251,63 +404,69 @@ class World {
     });
   }
 
-  //################ checking flags ##########################
+  /**
+   * Checks for keyboard input to throw a bottle, creates a new ThrowableObject,
+   * adds it to the `throwableObjects` array, and decreases the collected bottle count.
+   */
   checkThrownObjects() {
     if (this.keyboard.D && World.collectedBottles > 0) {
-      if(!this.character.otherDirection) {
+      if (!this.character.otherDirection) {
         this.bottle = new ThrowableObject(this.character.x + 50, this.character.y + 110, this.character.otherDirection);
-        //console.log('nova lahev doprava');
       }
       else if (this.character.otherDirection) {
         this.bottle = new ThrowableObject(this.character.x - 20, this.character.y + 110, this.character.otherDirection);
-        //console.log('nova lahev doleva');
       }
       this.throwableObjects.push(this.bottle);
       World.collectedBottles--;
-      //console.log(World.collectedBottles);
       this.bottleBar.setPercentage(World.collectedBottles);
     }
   }
 
+  /**
+   * Checks the distance between the character and the end boss to trigger specific behaviors.
+   */
   checkDistanceToEndboss() {
     this.checkAlertDistance();
     this.checkAttackDistance();
   }
 
+  /**
+   * Checks if the character is within the alert distance of the end boss and sets its `isAlert` flag.
+   */
   checkAlertDistance() {
     if (
       this.level.enemies[3].x - this.character.x + this.character.width < 500 &&
       !this.level.enemies[3].isAlert &&
       !this.level.enemies[3].alertAnimationShown
     ) {
-      //console.log("nah genug");
       this.level.enemies[3].isAlert = true;
     }
   }
 
+  /**
+   * Checks if the character is within the attack distance of the end boss and sets its `isAttacking` flag.
+   */
   checkAttackDistance() {
-    //if (this.character.isColliding(this.level.enemies[3])) {
     if (this.level.enemies[3].x - this.character.x + this.character.width < 300) {
-      console.log("attack distance erreicht");
       this.level.enemies[3].isAttacking = true;
     } else {
       this.level.enemies[3].isAttacking = false;
     }
   }
 
+    /**
+   * Resets the game state, including enemy states, collected items, character energy, and game over flag.
+   */
   resetGame() {
-    //console.log("chickenDead is", this.level.enemies.chickenDead);
-    //console.log(this.level.enemies[3]);
     this.level.enemies.chickenDead = false;
-      this.level.enemies[3].chickenDead = false;
-      World.collectedBottles = 0;
-      this.collectedCoins = 0;
-      this.character.energy = 100;
-      this.level.enemies[3].energy = 100;
-      World.gameOver = false;
-      World.chicken.energy = 100;
-      World.chicken = new Chicken();
-    }
-
+    this.level.enemies[3].chickenDead = false;
+    World.collectedBottles = 0;
+    this.collectedCoins = 0;
+    this.character.energy = 100;
+    this.level.enemies[3].energy = 100;
+    World.gameOver = false;
+    World.chicken.energy = 100;
+    World.chicken = new Chicken();
+  }
 
 }

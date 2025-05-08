@@ -3,90 +3,118 @@ let world;
 let keyboard = new Keyboard();
 let gameAudio = new AudioHub();
 let fullScreen = false;
-//neni dovoleno, aby na strance rovnou zacala hudba, aniz by user nejdriv nemel nejakou interakci
-//TODO dat default ein mutebutton a na jeho click taky muzu s muzikou zacit, ale pak mi to zacne cely odznova, kdyz zacnu hru?
 
-function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hintergrund läuft
+/**
+ * Ends all active intervals, so that nothing runs in the background.
+ */
+function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
-  }
+}
 
+/**
+ * Starts a new game. Initializes game state, music, UI, and game world.
+ */
 function startNewGame() {
     playingMusic = true;
     AudioHub.playBackground();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
-    //init(); tu funkci jsem prekopirovala pod to
     initLevel();
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
     world.resetGame();
-    console.log("reseting in init");
-    //console.log("My Character is", world["character"]);
     checkMuteAtStart();
     toggleBtnImageInPlayModus();
     initMobileButtons();
 }
 
-//gemini vorschlag
-// function startNewGame() {
-//     playingMusic = true;
-//     AudioHub.playBackground();
-//     document.getElementById("myBody").innerHTML = getCanvasTemplate();
-//     const canvasElement = document.getElementById("canvas"); // Canvas-Element jetzt holen
-//     world = new World(canvasElement, keyboard);       // World instanziieren, nachdem Canvas existiert
-//     initLevel();
-//     world.resetGame();
-//     console.log("reseting in init");
-//     toggleBtnImageInPlayModus();
-//     initMobileButtons();
-// }
-
-function getHomeScreen(){
+/**
+ * Navigates to the home screen, stopping music and clearing intervals.
+ */
+function getHomeScreen() {
     stopMusic();
     clearAllIntervals();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getHomeScreenTemplates();
 }
 
+/**
+ * Displays the imprint overlay.
+ */
 function getImpressumOverlay() {
     document.getElementById("myBody").innerHTML = getImpressumTemplates();
 }
 
+/**
+ * Displays the legal information overlay.
+ */
 function getLegalInformationOverlay() {
     document.getElementById("myBody").innerHTML = getLegalInformationTemplates();
 }
 
-function getWinScreen(){
+/**
+ * Displays the win screen, clearing the level and intervals.
+ */
+function getWinScreen() {
     document.getElementById("myBody").innerHTML = getWonScreenTemplate();
     clearLevel();
     clearAllIntervals();
-    
 }
 
+/**
+ * Displays the loss screen, clearing the level and intervals.
+ */
 function getLossScreen() {
     document.getElementById("myBody").innerHTML = getLossScreenTemplate();
     clearLevel();
     clearAllIntervals();
 }
 
+/**
+ * Periodically toggles the button image based on the mute state in local storage.
+ */
 function toggleBtnImageInPlayModus() {
     setInterval(() => {
         let mutedState = localStorage.getItem("muted");
-        if(mutedState == "yes") {
-            let bigButtonImage = document.getElementById("soundBtn").querySelector('img');
-            let smallButtonImage = document.getElementById("muteBtn").querySelector('img');
-            bigButtonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
-            smallButtonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
+        if (mutedState == "yes") {
+            changeBtnToMuted();
         }
         else if (mutedState == "no") {
-            let bigButtonImage = document.getElementById("soundBtn").querySelector('img');
-            let smallButtonImage = document.getElementById("muteBtn").querySelector('img');
-            bigButtonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
-            smallButtonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
+            changeBtnToSound();
         }
     }, 200);
 }
 
+/**
+ * Stops all currently playing music.
+ */
+function stopMusic() {
+    AudioHub.stopAll();
+}
+
+/**
+ * Changes the sound button images to the muted icon.
+ */
+function changeBtnToMuted() {
+    let bigButtonImage = document.getElementById("soundBtn").querySelector('img');
+    let smallButtonImage = document.getElementById("muteBtn").querySelector('img');
+    bigButtonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
+    smallButtonImage.src = "./img_pollo_locco/icons/sound_muted_icon.png";
+}
+
+/**
+ * Changes the sound button images to the sound on icon.
+ */
+function changeBtnToSound() {
+    let bigButtonImage = document.getElementById("soundBtn").querySelector('img');
+    let smallButtonImage = document.getElementById("muteBtn").querySelector('img');
+    bigButtonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
+    smallButtonImage.src = "./img_pollo_locco/icons/sound_on_icon.png";
+}
+
+/**
+ * Checks the mute state in local storage at the start and adjusts music accordingly.
+ */
 function checkMuteAtStart() {
     let mutedState = localStorage.getItem("muted");
     if (mutedState == "yes") {
@@ -97,11 +125,13 @@ function checkMuteAtStart() {
     }
 }
 
+/**
+ * Toggles the music playback and updates the mute state in local storage.
+ */
 function toggleMusicInPlayModus() {
     let mutedState = localStorage.getItem("muted");
-    if(mutedState == "yes") {
+    if (mutedState == "yes") {
         AudioHub.playBackground();
-        console.log("musik soll stoppen");
         localStorage.setItem("muted", "no");
     }
     else if (mutedState == "no") {
@@ -110,10 +140,10 @@ function toggleMusicInPlayModus() {
     }
 }
 
-function stopMusic() {
-    AudioHub.stopAll();
-}
-
+/**
+ * Event listener for keydown events to control player actions.
+ * @param {KeyboardEvent} event - The keyboard event object.
+ */
 window.addEventListener('keydown', (event) => {
     if (event.keyCode == 32) {
         keyboard.SPACE = true;
@@ -135,6 +165,10 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
+/**
+ * Event listener for keyup events to stop player actions.
+ * @param {KeyboardEvent} event - The keyboard event object.
+ */
 window.addEventListener('keyup', (event) => {
     if (event.keyCode == 32) {
         keyboard.SPACE = false;
@@ -156,6 +190,9 @@ window.addEventListener('keyup', (event) => {
     }
 });
 
+/**
+ * Initializes touch event listeners for mobile controls.
+ */
 function initMobileButtons() {
     addTouchListener('btnMoveLeft', 'LEFT', true);
     addTouchListener('btnJump', 'SPACE', true);
@@ -163,8 +200,10 @@ function initMobileButtons() {
     addTouchListener('btnThrow', 'D', true);
 }
 
-//window.addEventListener('load', init);
-
+/**
+ * Another event listener for keyup events, potentially handling different keys.
+ * @param {KeyboardEvent} event - The keyboard event object.
+ */
 window.addEventListener('keyup', (event) => {
     if (event.keyCode == 39) keyboard.RIGHT = false;
     if (event.keyCode == 37) keyboard.LEFT = false;
@@ -175,7 +214,14 @@ window.addEventListener('keyup', (event) => {
     if (event.keyCode == 78) keyboard.N = false;
 });
 
-function addTouchListener(id, prop, onVal, offVal) {
+/**
+ * Adds touch event listeners to a specific button element.
+ * @param {string} id - The ID of the button element.
+ * @param {string} prop - The keyboard property to control.
+ * @param {*} onVal - The value to set on touchstart.
+ * @param {*} [offVal=false] - The value to set on touchend.
+ */
+function addTouchListener(id, prop, onVal, offVal = false) {
     const btn = document.getElementById(id);
     if (btn) {
         btn.addEventListener('touchstart', e => { e.preventDefault(); keyboard[prop] = onVal; });
@@ -183,6 +229,9 @@ function addTouchListener(id, prop, onVal, offVal) {
     }
 }
 
+/**
+ * Requests fullscreen mode for the canvas.
+ */
 function getFullScreenMode() {
     let canvas = document.getElementById("canvas");
     canvas.requestFullscreen();

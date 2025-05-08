@@ -1,197 +1,278 @@
-.overlay_startgame {
-    z-index: 10;
-    position: fixed;
+/* --------------------------------------------------
+   Start Game Overlay Styles
+   -------------------------------------------------- */
+
+   .overlay_startgame {
+    z-index: 10; /* Ensure it's above other elements */
+    position: fixed; /* Stay in place during scrolling */
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    height: 100dvh;
-    width: 100vw;
-    background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp);
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100dvh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp); /* Background image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
 }
+
+/* --------------------------------------------------
+   Instructions Section Styles
+   -------------------------------------------------- */
 
 .instructions {
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    height: 500px;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange items vertically */
+    padding: 16px; /* Add some padding around the instructions */
+    height: 500px; /* Fixed height for the instructions section */
 }
+
+/* --------------------------------------------------
+   Game Description Text Styles
+   -------------------------------------------------- */
 
 .game_description {
-    text-align: center;
-    font-size: 18px;
+    text-align: center; /* Center the description text */
+    font-size: 18px; /* Set the font size */
 }
+
+/* --------------------------------------------------
+   Emphasized Text Styles
+   -------------------------------------------------- */
 
 .emphasise {
-    font-size: 20px;
-    color: red;
-    text-align: center;
-    margin-top: 0;
-    padding-top: 0;
+    font-size: 20px; /* Larger font size for emphasis */
+    color: red; /* Red color for emphasis */
+    text-align: center; /* Center the emphasized text */
+    margin-top: 0; /* Remove top margin */
+    padding-top: 0; /* Remove top padding */
 }
+
+/* --------------------------------------------------
+   Main Content Area Styles
+   -------------------------------------------------- */
 
 .main {
-    display: flex;
-    
+    display: flex; /* Use flexbox for layout, arranging items horizontally */
 }
+
+/* --------------------------------------------------
+   Left Main Section (Controls) Styles
+   -------------------------------------------------- */
+
 .main_left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 36px;
-    width: 50%;
-    height: 240px;
-    font-size: 24px;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    gap: 36px; /* Spacing between control groups */
+    width: 50%; /* Take half the width of the main section */
+    height: 240px; /* Fixed height for the left main section */
+    font-size: 24px; /* Set the font size for controls */
 }
+
+/* --------------------------------------------------
+   Move Control Styles
+   -------------------------------------------------- */
 
 .move {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+    display: flex; /* Arrange arrow and text horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 24px; /* Spacing between elements */
 }
+
+/* --------------------------------------------------
+   Arrow Button Styles
+   -------------------------------------------------- */
 
 .arrow {
-    background-color: rgb(158 205 60);
-    height: 36px;
-    width: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
+    background-color: rgb(158 205 60); /* Green background color */
+    height: 36px; /* Fixed height */
+    width: 42px; /* Fixed width */
+    display: flex; /* Center the image inside */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border-radius: 12px; /* Rounded corners */
 }
 
-.arrow img { height: 16px;}
+.arrow img {
+    height: 16px; /* Height of the arrow image */
+}
+
+/* --------------------------------------------------
+   Jump Control Styles
+   -------------------------------------------------- */
 
 .jump {
-    display: flex;
-    gap: 24px;
-    align-items: center;
+    display: flex; /* Arrange spacebar and text horizontally */
+    gap: 24px; /* Spacing between elements */
+    align-items: center; /* Center items vertically */
 }
+
+/* --------------------------------------------------
+   Spacebar Button Style
+   -------------------------------------------------- */
 
 .spacebar {
-    background-color: rgb(158 205 60);
-    height: 36px;
-    width: 142px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    color: white;
-    -webkit-text-stroke-width: 1px;
+    background-color: rgb(158 205 60); /* Green background color */
+    height: 36px; /* Fixed height */
+    width: 142px; /* Fixed width */
+    display: flex; /* Center the text inside */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border-radius: 12px; /* Rounded corners */
+    color: white; /* White text color */
+    -webkit-text-stroke-width: 1px; /* Black outline for better readability */
     -webkit-text-stroke-color: black;
 }
+
+/* --------------------------------------------------
+   Throw Control Styles
+   -------------------------------------------------- */
 
 .throw {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+    display: flex; /* Arrange 'D' button and text horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 24px; /* Spacing between elements */
 }
 
+/* --------------------------------------------------
+   'D' Button Style
+   -------------------------------------------------- */
+
 .d {
-    background-color: rgb(158 205 60);
-    height: 36px;
-    width: 36px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    color: white;
-    -webkit-text-stroke-width: 1px;
+    background-color: rgb(158 205 60); /* Green background color */
+    height: 36px; /* Fixed height */
+    width: 36px; /* Fixed width */
+    display: flex; /* Center the text inside */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border-radius: 12px; /* Rounded corners */
+    color: white; /* White text color */
+    -webkit-text-stroke-width: 1px; /* Black outline for better readability */
     -webkit-text-stroke-color: black;
 }
 
+/* --------------------------------------------------
+   Right Main Section (Start Button) Styles
+   -------------------------------------------------- */
+
 .main_right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 36px;
-    width: 50%;
-    height: 240px;
-    font-size: 24px;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    gap: 36px; /* Spacing between elements */
+    width: 50%; /* Take half the width of the main section */
+    height: 240px; /* Fixed height for the right main section */
+    font-size: 24px; /* Set the font size */
 }
 
 .main_right img {
-    height: 20px;
+    height: 20px; /* Height of the image in the right section */
 }
+
+/* --------------------------------------------------
+   Generic Start Screen Button Styles
+   -------------------------------------------------- */
 
 .start_screen_btn {
-    background-color: rgb(158 205 60);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    color: white;
-    font-family: HVD_Comic_Serif_Pro;
-    cursor: pointer;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    background-color: rgb(158 205 60); /* Green background color */
+    display: flex; /* Center text */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border-radius: 12px; /* Rounded corners */
+    color: white; /* White text color */
+    font-family: HVD_Comic_Serif_Pro; /* Custom font */
+    cursor: pointer; /* Indicate it's clickable */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Shadow effect */
 }
 
-/* #soundBtn {
-    height: 40px;
-    width: 40px;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-} */
+/* --------------------------------------------------
+   Start Game Button Styles
+   -------------------------------------------------- */
 
 #startGameBtn {
-    height: 100px;
-    width: 150px;
-    font-size: 36px;
-    -webkit-text-stroke-width: 1px;
+    height: 100px; /* Larger height for the start button */
+    width: 150px; /* Larger width for the start button */
+    font-size: 36px; /* Larger font size */
+    -webkit-text-stroke-width: 1px; /* Black outline for better readability */
     -webkit-text-stroke-color: black;
 }
 
+/* --------------------------------------------------
+   Legal Information Button Styles
+   -------------------------------------------------- */
+
 #legalInformations {
-    color:black;
-    background-color:antiquewhite;
-    border-radius: 8px;
+    color: black; /* Black text color */
+    background-color: antiquewhite; /* Light background color */
+    border-radius: 8px; /* Slightly less rounded corners */
 }
+
+/* --------------------------------------------------
+   Imprint Button Styles
+   -------------------------------------------------- */
 
 #impressum {
-    color:black;
-    background-color:antiquewhite;
-    border-radius: 8px;
-    box-sizing: border-box;
-    margin-right: 125px;
+    color: black; /* Black text color */
+    background-color: antiquewhite; /* Light background color */
+    border-radius: 8px; /* Slightly less rounded corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin-right: 125px; /* Add right margin to separate from other elements */
 }
+
+/* --------------------------------------------------
+   Information Buttons Container Styles
+   -------------------------------------------------- */
 
 .information {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 200px;
-    align-items: center;
+    display: flex; /* Arrange buttons horizontally */
+    justify-content: space-evenly; /* Distribute space evenly around buttons */
+    gap: 200px; /* Large gap between the buttons */
+    align-items: center; /* Center buttons vertically */
 }
+
+/* --------------------------------------------------
+   Control Icons Container Styles
+   -------------------------------------------------- */
 
 .control_icons {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 16px;
-    align-items: center;
-    margin-top: 16px;
+    display: flex; /* Arrange icons horizontally */
+    justify-content: space-evenly; /* Distribute space evenly around icons */
+    gap: 16px; /* Spacing between icons */
+    align-items: center; /* Center icons vertically */
+    margin-top: 16px; /* Add top margin */
 }
 
+/* --------------------------------------------------
+   Generic Icon Button Styles
+   -------------------------------------------------- */
+
 .icon_button {
-    background-color: rgb(158 205 60);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    cursor: pointer;
-    padding: 8px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    font-family: HVD_Comic_Serif_Pro;
-    width: 50px;
+    background-color: rgb(158 205 60); /* Green background color */
+    display: flex; /* Center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border-radius: 12px; /* Rounded corners */
+    cursor: pointer; /* Indicate it's clickable */
+    padding: 8px; /* Add some padding */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Shadow effect */
+    font-family: HVD_Comic_Serif_Pro; /* Custom font */
+    width: 50px; /* Fixed width for icon buttons */
 }
 
 .control_icons img {
-    height: 32px;
+    height: 32px; /* Height of the icons */
 }
 
-.d_none {display: none;}
+/* --------------------------------------------------
+   Display None Class
+   -------------------------------------------------- */
+
+.d_none {
+    display: none; /* Class to hide elements */
+}

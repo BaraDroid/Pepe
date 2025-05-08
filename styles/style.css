@@ -1,128 +1,185 @@
-@font-face {
+/* --------------------------------------------------
+   Font Definition
+   -------------------------------------------------- */
+
+   @font-face {
     font-family: 'HVD_Comic_Serif_Pro';
-    src: url(../fonts/HVD_Comic_Serif_Pro.otf);
+    src: url(../fonts/HVD_Comic_Serif_Pro.otf); /* Path to the font file */
 }
+
+/* --------------------------------------------------
+   Body Styles
+   -------------------------------------------------- */
 
 body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color:rgb(132 9 42);
-    background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp);
-    background-position: center;
-    background-size: cover;
-    /* background-repeat: no-repeat; */
-    font-family: 'HVD_Comic_Serif_Pro';
+    margin: 0; /* Remove default body margin */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
+    background-color: rgb(132 9 42); /* Dark red background color */
+    background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp); /* Background image */
+    background-position: center; /* Center the background image */
+    background-size: cover; /* Cover the entire background */
+    font-family: 'HVD_Comic_Serif_Pro'; /* Use the custom font */
 }
+
+/* --------------------------------------------------
+   Canvas Styles
+   -------------------------------------------------- */
 
 canvas {
-    background-color: rgb(253 254 156);;
-    border: 15px solid rgb(91, 0, 29);
-    border-radius: 20px;
-    border-style: double;
-    display: block;
+    background-color: rgb(253 254 156); /* Light yellow background color */
+    border: 15px solid rgb(91, 0, 29); /* Thick, solid dark red border */
+    border-radius: 20px; /* Rounded corners */
+    border-style: double; /* Double border style */
+    display: block; /* Remove extra space below the canvas */
 }
+
+/* --------------------------------------------------
+   Main Title (h1) Styles
+   -------------------------------------------------- */
 
 h1 {
-    font-size: 80px;
-    margin-bottom: 8px;
-    color: rgb(132 9 42);
-    -webkit-text-stroke-width: 3px;
+    font-size: 80px; /* Large font size */
+    margin-bottom: 8px; /* Small bottom margin */
+    color: rgb(132 9 42); /* Dark red color */
+    -webkit-text-stroke-width: 3px; /* Thick white outline */
     -webkit-text-stroke-color: rgb(250, 247, 221);
-    text-shadow: 12px 12px 12px rgb(207, 20, 70);
+    text-shadow: 12px 12px 12px rgb(207, 20, 70); /* Red shadow */
 }
+
+/* --------------------------------------------------
+   Lost Game Overlay Styles
+   -------------------------------------------------- */
 
 .overlay_lostgame {
-    z-index: 10;
-    position: fixed;
+    z-index: 10; /* Ensure it's above other elements */
+    position: fixed; /* Stay in place during scrolling */
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    height: 100dvh;
-    width: 100vw;
-    background-image: url(../img_pollo_locco/img/bg_images/lost_game.webp);
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100dvh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    background-image: url(../img_pollo_locco/img/bg_images/lost_game.webp); /* Background image for lost screen */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
 }
+
+/* --------------------------------------------------
+   Win Game Overlay Styles
+   -------------------------------------------------- */
 
 .overlay_wingame {
-    z-index: 10;
-    position: fixed;
+    z-index: 10; /* Ensure it's above other elements */
+    position: fixed; /* Stay in place during scrolling */
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    height: 100dvh;
-    width: 100%;
-    background-image: url(../img_pollo_locco/img/bg_images/win_screen.webp);
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100dvh; /* Full viewport height */
+    width: 100%; /* Full width */
+    background-image: url(../img_pollo_locco/img/bg_images/win_screen.webp); /* Background image for win screen */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
 }
+
+/* --------------------------------------------------
+   Play Again Button Styles
+   -------------------------------------------------- */
 
 .play_again_btn {
-    height: 60px;
-    width: 150px;
-    font-family: 'HVD_Comic_Serif_Pro';
-    font-size: 20px;
-    color: rgb(29 19 22);
-    border-radius: 15px;
-    text-shadow: #FC0 1px 0 10px;
-    border: 1px solid #FC0;
-    background-color: rgb(253 246 155);
-    cursor: pointer;
-    margin-top: 350px;
-    box-shadow: 0 8px 16px 0 #FC0, 0 6px 20px 0 #FC0;
+    height: 60px; /* Fixed height */
+    width: 150px; /* Fixed width */
+    font-family: 'HVD_Comic_Serif_Pro'; /* Custom font */
+    font-size: 20px; /* Font size */
+    color: rgb(29 19 22); /* Dark brown text color */
+    border-radius: 15px; /* Rounded corners */
+    text-shadow: #FC0 1px 0 10px; /* Yellow text shadow */
+    border: 1px solid #FC0; /* Thin yellow border */
+    background-color: rgb(253 246 155); /* Light yellow background */
+    cursor: pointer; /* Indicate it's clickable */
+    margin-top: 350px; /* Push button down on lost screen */
+    box-shadow: 0 8px 16px 0 #FC0, 0 6px 20px 0 #FC0; /* Yellow shadow */
 }
+
+/* --------------------------------------------------
+   Play Again Button on Win Screen Styles
+   -------------------------------------------------- */
 
 #playAgainWin {
-    margin-top: 0;
-    margin-bottom: 180px;
+    margin-top: 0; /* Reset top margin */
+    margin-bottom: 180px; /* Push button up on win screen */
 }
+
+/* --------------------------------------------------
+   Play Again Button Hover Effect
+   -------------------------------------------------- */
 
 .play_again_btn:hover {
-    background-color: rgba(255, 204, 0, 0.588);
-    transition-duration: 0.4s;
-    transition-timing-function: ease-in-out
+    background-color: rgba(255, 204, 0, 0.588); /* Slightly transparent yellow on hover */
+    transition-duration: 0.4s; /* Smooth transition */
+    transition-timing-function: ease-in-out; /* Ease-in-out timing */
 }
+
+/* --------------------------------------------------
+   Instructions Section Styles (Reused from Start Screen)
+   -------------------------------------------------- */
 
 .instructions {
-    height: 480px;
-    width: 720px;
-    background-color: rgb(253 254 156);;
-    border: 15px solid rgb(91, 0, 29);
-    border-radius: 20px;
-    border-style: double;
+    height: 480px; /* Fixed height */
+    width: 720px; /* Fixed width */
+    background-color: rgb(253 254 156); /* Light yellow background */
+    border: 15px solid rgb(91, 0, 29); /* Thick dark red border */
+    border-radius: 20px; /* Rounded corners */
+    border-style: double; /* Double border */
 }
+
+/* --------------------------------------------------
+   Impressum Overlay Styles
+   -------------------------------------------------- */
 
 .impressum_overlay {
-    height: fit-content;
-    width: 80dvw;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: auto;
+    height: fit-content; /* Adjust height based on content */
+    width: 80dvw; /* 80% of viewport width */
+    padding: 24px; /* Padding around the content */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange items vertically */
+    justify-content: space-between; /* Distribute space between items */
+    margin-left: auto; /* Auto margins for horizontal centering */
     margin-right: auto;
-    background-color: rgb(253 254 156);;
-    border: 15px solid rgb(91, 0, 29);
-    border-radius: 20px;
-    border-style: double;
+    background-color: rgb(253 254 156); /* Light yellow background */
+    border: 15px solid rgb(91, 0, 29); /* Thick dark red border */
+    border-radius: 20px; /* Rounded corners */
+    border-style: double; /* Double border */
 }
+
+/* --------------------------------------------------
+   Impressum Overlay Title (h1) Styles
+   -------------------------------------------------- */
 
 .impressum_overlay h1 {
-    margin-top: 0;
+    margin-top: 0; /* Remove default top margin */
 }
+
+/* --------------------------------------------------
+   Impressum Overlay Close Button Styles
+   -------------------------------------------------- */
 
 .impressum_overlay button {
-    margin-left: 80%;
+    margin-left: 80%; /* Push the button to the right */
 }
 
-.d_none {display: none;}
+/* --------------------------------------------------
+   Display None Class (Reused)
+   -------------------------------------------------- */
+
+.d_none {
+    display: none; /* Class to hide elements */
+}

@@ -1,53 +1,68 @@
 class AudioHub {
-static BACKGROUND = new Audio('./audio/cucaracha.mp3'); //eingefügt
+    /** @type {HTMLAudioElement} - Background music audio object. */
+    static BACKGROUND = new Audio('./audio/cucaracha.mp3'); //eingefügt
+    /** @type {HTMLAudioElement} - Walking sound effect audio object. */
+    static WALK = new Audio('./audio/footsteps.mp3'); //eingefügt
+    /** @type {HTMLAudioElement} - Jumping sound effect audio object. */
+    static JUMP = new Audio('./audio/jump_boing.mp3');  //eingefügt
+    /** @type {HTMLAudioElement} - Hurt sound effect audio object. */
+    static HURT = new Audio('./audio/ouch.mp3');  //eingefügt
+    /** @type {HTMLAudioElement} - Death sound effect audio object. */
+    static DEAD = new Audio('./audio/male_yell.mp3'); //eingefügt
+    /** @type {HTMLAudioElement} - Bottle collect sound effect audio object. */
+    static BOTTLECOLLECT = new Audio('./audio/glass_klirr.mp3');    //eingefügt
+    /** @type {HTMLAudioElement} - Bottle throw sound effect audio object. */
+    static BOTTLETHROW = new Audio('./audio/glass_broken.mp3'); //jen kdyz to trefi endbosse, jinak je v tom ale prisernej bordel
+    /** @type {HTMLAudioElement} - Coin collect sound effect audio object. */
+    static COINCOLLECT = new Audio('./audio/glass_short.mp3');  //eingefügt
+    /** @type {HTMLAudioElement} - Chicken smash sound effect audio object. */
+    static CHICKENSMASH = new Audio('./audio/chicken_smashed.mp3'); //eingefügt
+    /** @type {HTMLAudioElement} - Boss enter sound effect audio object. */
+    static BOSSENTER = new Audio('./audio/chicken_clucking.mp3');
+    /** @type {HTMLAudioElement} - Boss hit sound effect audio object. */
+    static BOSSHIT = new Audio('./audio/monster_scream.mp3');   //EINGEFÜGT
+    /** @type {HTMLAudioElement} - Boss dead sound effect audio object. */
+    static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3'); //nefunguje, pze se mi broken bottle image objevuje furt dokola, takze endboss ani neumre
+    /** @type {HTMLAudioElement} - Victory sound effect audio object. */
+    static VICTORY = new Audio('./audio/fanfare.mp3');  //
+    /** @type {HTMLAudioElement} - Defeat sound effect audio object. */
+    static DEFEAT = new Audio('./audio/dead.mp3')//eingefügt
+    /** @type {HTMLAudioElement[]} - Array containing all audio objects. */
+    static ALL = [
+        AudioHub.BACKGROUND,
+        AudioHub.WALK,
+        AudioHub.JUMP,
+        AudioHub.HURT,
+        AudioHub.DEAD,
+        AudioHub.BOTTLECOLLECT,
+        AudioHub.BOTTLETHROW,
+        AudioHub.COINCOLLECT,
+        AudioHub.CHICKENSMASH,
+        AudioHub.BOSSENTER,
+        AudioHub.BOSSHIT,
+        AudioHub.BOSSDEAD,
+        AudioHub.VICTORY,
+        AudioHub.DEFEAT,
+    ];
+    /** @type {number|undefined} - Interval ID for the background music playback. */
+    static backgroundMusicInterval;
 
-static WALK = new Audio('./audio/footsteps.mp3'); //eingefügt
-static JUMP = new Audio('./audio/jump_boing.mp3');  //eingefügt
-static HURT = new Audio('./audio/ouch.mp3');  //eingefügt
-static DEAD = new Audio('./audio/male_yell.mp3'); //eingefügt
-
-static BOTTLECOLLECT = new Audio('./audio/glass_klirr.mp3');    //eingefügt
-static BOTTLETHROW = new Audio('./audio/glass_broken.mp3'); //jen kdyz to trefi endbosse, jinak je v tom ale prisernej bordel
-
-static COINCOLLECT = new Audio('./audio/glass_short.mp3');  //eingefügt
-
-static CHICKENSMASH = new Audio('./audio/chicken_smashed.mp3'); //eingefügt
-static BOSSENTER = new Audio('./audio/chicken_clucking.mp3');
-static BOSSHIT = new Audio('./audio/monster_scream.mp3');   //EINGEFÜGT
-static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3'); //nefunguje, pze se mi broken bottle image objevuje furt dokola, takze endboss ani neumre
-
-static VICTORY = new Audio('./audio/fanfare.mp3');  //
-static DEFEAT = new Audio('./audio/dead.mp3')//eingefügt
-
-static ALL = [
-    AudioHub.BACKGROUND,
-    AudioHub.WALK,
-    AudioHub.JUMP,
-    AudioHub.HURT,
-    AudioHub.DEAD,
-    AudioHub.BOTTLECOLLECT,
-    AudioHub.BOTTLETHROW,
-    AudioHub.COINCOLLECT,
-    AudioHub.CHICKENSMASH,
-    AudioHub.BOSSENTER,
-    AudioHub.BOSSHIT,
-    AudioHub.BOSSDEAD,
-    AudioHub.VICTORY,
-    AudioHub.DEFEAT,
-];
-
-static backgroundMusicInterval;
-
+    /**
+     * Creates an instance of AudioHub.
+     */
     constructor() {
         //this.checkSounds();
     }
 
     // checkSounds() {
     //     setInterval(() => {
-            
+
     //     }, 200);
     // }
 
+    /**
+     * Starts playing the background music in a loop.
+     */
     static playBackground() {
         AudioHub.backgroundMusicInterval = setInterval(() => {
             if(AudioHub.BACKGROUND.readyState === 4) {
@@ -57,13 +72,19 @@ static backgroundMusicInterval;
         }, 200);
     }
 
+    /**
+     * Stops the background music playback.
+     */
     static stopBackground() {
         AudioHub.BACKGROUND.pause();
         AudioHub.BACKGROUND.currentTime = 0;
         clearInterval(AudioHub.backgroundMusicInterval);
     }
 
-    //checksthe flag playingMusic in game.js
+    /**
+     * Plays a given sound effect if the game is not muted.
+     * @param {HTMLAudioElement} sound - The audio object to play.
+     */
     static playSoundeffect(sound) {
         let mutedState = localStorage.getItem("muted");
         if (mutedState == "no") {
@@ -75,14 +96,20 @@ static backgroundMusicInterval;
             sound.volume = 0;
             sound.currentTime = 0;
         }
-        
+
     }
 
+    /**
+     * Pauses a given sound effect.
+     * @param {HTMLAudioElement} sound - The audio object to pause.
+     */
     static pauseSoundeffect(sound) {
         sound.pause();
     }
 
-     // Stoppt das Abspielen aller Audiodateien
+     /**
+      * Stops the playback of all audio elements.
+      */
      static stopAll() {
         AudioHub.ALL.forEach(sound => {
             sound.pause();  // Pausiert jedes Audio in der Liste

@@ -1,140 +1,290 @@
-.btn_panel {
-    flex-direction: column;
-    gap: 16px;
-    min-width: 36px;
-    min-height: 24px;
+/* --------------------------------------------------
+   Button Panel Styles
+   -------------------------------------------------- */
+
+   .btn_panel {
+    display: flex; /* Use flexbox to arrange buttons */
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 16px; /* Spacing between buttons */
+    min-width: 36px; /* Minimum width of the button panel */
+    min-height: 24px; /* Minimum height of the button panel */
 }
+
+/* --------------------------------------------------
+   Left Button Panel Styles
+   -------------------------------------------------- */
 
 #panelLeft {
-    position: absolute;
-    top: 220px;
-    display: none;
+    position: absolute; /* Position relative to the nearest positioned ancestor */
+    top: 220px; /* Position from the top */
+    display: none; /* Initially hidden */
 }
+
+/* --------------------------------------------------
+   Right Button Panel Styles
+   -------------------------------------------------- */
 
 #panelRight {
-    position: absolute;
-    top: 220px;
-    display: none;
+    position: absolute; /* Position relative to the nearest positioned ancestor */
+    top: 220px; /* Position from the top */
+    display: none; /* Initially hidden */
 }
+
+/* --------------------------------------------------
+   Mute Button Styles
+   -------------------------------------------------- */
 
 #muteBtn {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    display: none;
-    >img {height: 20px;}
+    position: absolute; /* Position relative to the nearest positioned ancestor */
+    top: 8px; /* Position from the top */
+    left: 8px; /* Position from the left */
+    display: none; /* Initially hidden */
 }
 
-#rotateMessage {
-    position: absolute;
-    white-space: nowrap;
-    margin-top: 20dvh;
-    width: auto;
-    display: none;
-    z-index: 100;
+#muteBtn > img {
+    height: 20px; /* Set the height of the image inside the mute button */
 }
+
+/* --------------------------------------------------
+   Rotate Device Message Styles
+   -------------------------------------------------- */
+
+#rotateMessage {
+    position: absolute; /* Position relative to the nearest positioned ancestor */
+    white-space: nowrap; /* Prevent text from wrapping */
+    margin-top: 20dvh; /* Margin from the top based on viewport height */
+    width: auto; /* Adjust width based on content */
+    display: none; /* Initially hidden */
+    z-index: 100; /* Ensure it's on top of other elements */
+}
+
+/* --------------------------------------------------
+   Media Query for Tablets and Smaller Desktops (max-width: 800px)
+   -------------------------------------------------- */
 
 @media (max-width: 800px) {
     .instructions {
-        height: 61dvh;
-        width: 91%;
+        height: 61dvh; /* Set height based on viewport height */
+        width: 91%; /* Set width as a percentage of the parent */
     }
-    #impressum {margin: 0;}
-    .information {gap: 0;}
+    #impressum {
+        margin: 0; /* Remove default margin for impressum button */
+    }
+    .information {
+        gap: 0; /* Remove gap between information buttons */
+    }
 }
+
+/* --------------------------------------------------
+   Media Query for Smaller Tablets and Larger Phones (max-width: 500px)
+   -------------------------------------------------- */
 
 @media (max-width: 500px) {
-    .game_description, .emphasise, span, .spacebar, .d {font-size: 16px;}
-    .move {gap: 8px;}
-    #startGameBtn {font-size: 18px; height: auto; width: auto; padding: 8px;}
-    .jump, .throw {gap: 8px;}
-    .information {flex-direction: column; gap: 8px;}
+    .game_description,
+    .emphasise,
+    span,
+    .spacebar,
+    .d {
+        font-size: 16px; /* Reduce font size for smaller screens */
+    }
+    .move {
+        gap: 8px; /* Reduce gap in the move control */
+    }
+    #startGameBtn {
+        font-size: 18px; /* Adjust start button font size */
+        height: auto; /* Adjust height based on content */
+        width: auto; /* Adjust width based on content */
+        padding: 8px; /* Adjust padding */
+    }
+    .jump,
+    .throw {
+        gap: 8px; /* Reduce gap in jump and throw controls */
+    }
+    .information {
+        flex-direction: column; /* Stack information buttons vertically */
+        gap: 8px; /* Add gap between stacked information buttons */
+    }
 }
 
-
+/* --------------------------------------------------
+   Media Query for Phones (max-width: 720px)
+   -------------------------------------------------- */
 
 @media only screen and (max-width: 720px) {
     canvas {
-        width: 100%;
-        border: unset;
-        border-radius: 0;
+        width: 100%; /* Make canvas take full width */
+        border: unset; /* Remove default border */
+        border-radius: 0; /* Remove border radius */
     }
-    .instructions {height: 100%;}
+    .instructions {
+        height: 100%; /* Make instructions take full height */
+    }
     .overlay_wingame {
-        background-size: 100% auto; 
-        background-repeat: no-repeat;
-        background-color: rgb(132 9 42);
+        background-size: 100% auto; /* Scale background image to fit width, maintain aspect ratio */
+        background-repeat: no-repeat; /* Prevent background image from repeating */
+        background-color: rgb(132 9 42); /* Set a fallback background color */
     }
-    #playAgainWin {margin-bottom: 0;}
+    #playAgainWin {
+        margin-bottom: 0; /* Remove bottom margin for play again button on win screen */
+    }
     .overlay_lostgame {
-        background-size: 100% auto; 
-        background-repeat: no-repeat;
-        background-color: black;
+        background-size: 100% auto; /* Scale background image to fit width, maintain aspect ratio */
+        background-repeat: no-repeat; /* Prevent background image from repeating */
+        background-color: black; /* Set a fallback background color */
     }
-    .play_again_btn {margin-top: 27dvh;}
+    .play_again_btn {
+        margin-top: 27dvh; /* Margin from the top based on viewport height */
+    }
 }
 
-@media(max-width: 520px) {
-    .play_again_btn {margin-top: 21dvh;}
+/* --------------------------------------------------
+   Media Query for Smaller Phones (max-width: 520px)
+   -------------------------------------------------- */
+
+@media (max-width: 520px) {
+    .play_again_btn {
+        margin-top: 21dvh; /* Adjust top margin for play again button on smaller phones */
+    }
 }
+
+/* --------------------------------------------------
+   Media Query for Even Smaller Phones (max-width: 450px)
+   -------------------------------------------------- */
 
 @media (max-width: 450px) {
     .play_again_btn {
-        font-size: 16px;
-        height: auto;
-        width: auto;
-        padding: 8px;
-        margin-top: 18dvh;
+        font-size: 16px; /* Further reduce font size */
+        height: auto; /* Adjust height based on content */
+        width: auto; /* Adjust width based on content */
+        padding: 8px; /* Maintain padding */
+        margin-top: 18dvh; /* Adjust top margin */
     }
 }
 
+/* --------------------------------------------------
+   Media Query for Very Small Phones (max-width: 400px)
+   -------------------------------------------------- */
+
 @media (max-width: 400px) {
-    .main {flex-direction: column;}
-    .main_left, .main_right {width: 100%; height: auto; padding: 8px;}
+    .main {
+        flex-direction: column; /* Stack main content vertically */
+    }
+    .main_left,
+    .main_right {
+        width: 100%; /* Make left and right sections take full width */
+        height: auto; /* Adjust height based on content */
+        padding: 8px; /* Maintain padding */
+    }
 }
 
+/* --------------------------------------------------
+   Media Query for Slightly Smaller Phones (max-width: 395px)
+   -------------------------------------------------- */
+
 @media (max-width: 395px) {
-    .play_again_btn {margin-top: 17dvh;}
+    .play_again_btn {
+        margin-top: 17dvh; /* Further adjust top margin */
+    }
 }
+
+/* --------------------------------------------------
+   Media Query for Short Screens (max-height: 480px)
+   -------------------------------------------------- */
 
 @media only screen and (max-height: 480px) {
     canvas {
-        max-height: 100dvh;
-        border: unset;
+        max-height: 100dvh; /* Limit canvas height to viewport height */
+        border: unset; /* Remove border */
     }
 }
+
+/* --------------------------------------------------
+   Media Query for Screens Taller Than 480px
+   -------------------------------------------------- */
 
 @media (min-height: 481px) {
-    body {display: flex; /* Aktiviere Flexbox für den body */
-        flex-direction: column; /* Ordne die Elemente vertikal an */
-        align-items: center; /* Horizontale Zentrierung der Elemente */
-        justify-content: center; /* Vertikale Zentrierung der Elemente */
-        min-height: 100dvh; /* Stelle sicher, dass der body die volle Höhe einnimmt */
-        height: auto;
-        overflow-y: auto;
+    body {
+        display: flex; /* Enable flexbox for the body */
+        flex-direction: column; /* Arrange body content vertically */
+        align-items: center; /* Center items horizontally */
+        justify-content: center; /* Center items vertically */
+        min-height: 100dvh; /* Ensure body takes at least full viewport height */
+        height: auto; /* Adjust height based on content */
+        overflow-y: auto; /* Allow vertical scrolling if content overflows */
     }
 }
 
-/* Smartphones ---------*/
+/* --------------------------------------------------
+   Media Query for Smartphones (Pointer: Coarse and Hover: None)
+   Indicates touch devices without precise pointer and no hover capability
+   -------------------------------------------------- */
+
 @media (pointer: coarse) and (hover: none) {
-    .instructions {height: auto;}
-    .control_icons {display: none;}
-    #panelLeft {display: flex; left: 2%;}
-    #panelRight {display: flex; right: 2%;}
-    #muteBtn {display: block;}
-    h1 {display: none;}
-    .play_again_btn {margin-top: 17dvh;}
-    .game_description, .emphasise, span, .spacebar, .d {font-size: 16px;}
-    .move {gap: 8px;}
-    #startGameBtn {font-size: 18px; height: auto; width: auto; padding: 8px;}
-    .jump, .throw {gap: 8px;}
-    .information {flex-direction: column; gap: 8px;}
-    .overlay_startgame {overflow-y: auto;}
+    .instructions {
+        height: auto; /* Adjust height based on content for touch devices */
+    }
+    .control_icons {
+        display: none; /* Hide default control icons */
+    }
+    #panelLeft {
+        display: flex; /* Show left button panel */
+        left: 2%; /* Position from the left */
+    }
+    #panelRight {
+        display: flex; /* Show right button panel */
+        right: 2%; /* Position from the right */
+    }
+    #muteBtn {
+        display: block; /* Show mute button */
+    }
+    h1 {
+        display: none; /* Hide the main title */
+    }
+    .play_again_btn {
+        margin-top: 17dvh; /* Adjust top margin for play again button */
+    }
+    .game_description,
+    .emphasise,
+    span,
+    .spacebar,
+    .d {
+        font-size: 16px; /* Adjust font size for touch devices */
+    }
+    .move {
+        gap: 8px; /* Adjust gap in move control */
+    }
+    #startGameBtn {
+        font-size: 18px; /* Adjust start button font size */
+        height: auto; /* Adjust height based on content */
+        width: auto; /* Adjust width based on content */
+        padding: 8px; /* Adjust padding */
+    }
+    .jump,
+    .throw {
+        gap: 8px; /* Adjust gap in jump and throw controls */
+    }
+    .information {
+        flex-direction: column; /* Stack information buttons vertically */
+        gap: 8px; /* Add gap between stacked information buttons */
+    }
+    .overlay_startgame {
+        overflow-y: auto; /* Allow scrolling on the start game overlay */
+    }
 }
 
-/* smartphones in portrait orientation */
+/* --------------------------------------------------
+   Media Query for Smartphones in Portrait Orientation (No Hover)
+   -------------------------------------------------- */
+
 @media (orientation: portrait) and (hover: none) {
-    #rotateMessage {display: block;}
-    .overlay_startgame {filter: blur(5px);}
-    h1 {display: flex; text-align: center;}
+    #rotateMessage {
+        display: block; /* Show rotate message in portrait orientation on touch devices */
+    }
+    .overlay_startgame {
+        filter: blur(5px); /* Apply blur to the start game overlay when in portrait */
+    }
+    h1 {
+        display: flex; /* Show the main title */
+        text-align: center; /* Center the title text */
+    }
 }

@@ -1,22 +1,38 @@
+/**
+ * Gibt das HTML-Template für den Bildschirm "Spiel verloren" zurück.
+ * Es enthält eine Schaltfläche, um das Spiel neu zu starten.
+ * @returns {string} - Der HTML-String für den Bildschirm "Spiel verloren".
+ */
 function getLossScreenTemplate(){
     return `<div id="LostGameOverlay" class="overlay_lostgame">
         <button id="playAgain" class="play_again_btn" onclick="stopMusic(); startNewGame()">Play again</button>
     </div>`;
 }
 
+/**
+ * Gibt das HTML-Template für den Bildschirm "Spiel gewonnen" zurück.
+ * Es enthält eine Schaltfläche, um das Spiel neu zu starten.
+ * @returns {string} - Der HTML-String für den Bildschirm "Spiel gewonnen".
+ */
 function getWonScreenTemplate(){
     return `<div class="overlay_wingame">
         <button id="playAgainWin" class="play_again_btn" onclick="stopMusic(); startNewGame()">Play again</button>
     </div>`;
 }
 
+/**
+ * Gibt das HTML-Template für den Startbildschirm des Spiels zurück.
+ * Es enthält den Spieltitel, eine Beschreibung, Steuerungshinweise,
+ * Schaltflächen zum Starten des Spiels und zum Anzeigen von rechtlichen Informationen.
+ * @returns {string} - Der HTML-String für den Startbildschirm.
+ */
 function getHomeScreenTemplates(){
     return `<div class="overlay_startgame" id="startGame">
         <h1>El pollo ¡LOCO!</h1>
         <div class="instructions" id="homeScreen">
             <span class="game_description">
                 Help the main character, Pepe, win the battle against the chicken army and save the world from the GIANT CHICKEN.
-                <br>Smaller chickens can be defeated either by jumping on them or by throwing a well-aimed bottle of fiery salsa, which you collect throw the game by touch, same as the coins. 
+                <br>Smaller chickens can be defeated either by jumping on them or by throwing a well-aimed bottle of fiery salsa, which you collect through the game by touch, same as the coins.
                 <br>Save some of the bottles for the end fight. Boss chicken should be made so hot, that it turns into roast one.</span>
                 <span class="emphasise">Be careful, each encounter with a chicken will cost you some of your precious lives!
             </span>
@@ -43,17 +59,17 @@ function getHomeScreenTemplates(){
                         <span>throw</span>
                     </div>
                 </div>
-            
+
 
                 <div class="main_right">
-                    
+
                     <button id="startGameBtn" class="start_screen_btn" onclick="startNewGame()">START PLAY</button>
                 </div>
         </div>
 
         <div class="information">
             <button class="start_screen_btn" id="legalInformations" onclick="getLegalInformationOverlay()">Nutzungsbedingungen & Datenschutz</button>
-            
+
             <button class="start_screen_btn" id="impressum" onclick="getImpressumOverlay()">Impressum</button>
         </div>
 
@@ -65,11 +81,17 @@ function getHomeScreenTemplates(){
     </div>`;
 }
 
+/**
+ * Gibt das HTML-Template für das Spiel-Canvas und die zugehörigen Steuerelemente zurück.
+ * Es enthält das Canvas-Element, Sound-, Home- und Vollbild-Schaltflächen
+ * sowie Bedienelemente für mobile Geräte.
+ * @returns {string} - Der HTML-String für das Spiel-Canvas.
+ */
 function getCanvasTemplate(){
     return `<h1>El pollo ¡LOCO!</h1>
 
     <canvas id="canvas" width="720" height="480">
-    </canvas>  
+    </canvas>
     <div class="control_icons">
         <button class="icon_button" id="soundBtn" onclick="toggleMusicInPlayModus()">
             <img src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">
@@ -81,7 +103,7 @@ function getCanvasTemplate(){
             <img src="./img_pollo_locco/icons/fullscreen_icon.png" alt="full screen modus icon">
         </button>
     </div>
-    <button class="icon_button" id="muteBtn" onclick="toggleBtnImageInPlayModus(); toggleMusicInPlayModus()">
+    <button class="icon_button" id="muteBtn" onclick="toggleMusicInPlayModus()">
         <img src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">
     </button>
     <div class="btn_panel" id="panelLeft">
@@ -94,14 +116,20 @@ function getCanvasTemplate(){
     </div>`;
 }
 
+/**
+ * Gibt das HTML-Template für den Impressum-Bildschirm zurück.
+ * Es enthält Informationen zum Betreiber des Spiels, Kontaktdaten,
+ * einen Haftungsausschluss und Urheberrechtshinweise.
+ * @returns {string} - Der HTML-String für den Impressum-Bildschirm.
+ */
 function getImpressumTemplates() {
     return `<div class="impressum_overlay">
     <button onclick="getHomeScreen()" class="start_screen_btn">Close</button>
         <div class="text_part">
     <h1>Impressum</h1>
-    
+
     <h3>Angaben gemäß § 5 TMG (Telemediengesetz)</h3>
-    
+
     <h5>Betreiber des Spiels:</h5>
     <span>
     Barbora Lambeinova
@@ -110,21 +138,27 @@ function getImpressumTemplates() {
     Deutschland
     </span>
     <h5>Kontakt:</h5>
-    
-    E-Mail: &#108;&#97;&#109;<!-- >@. -->&#98;&#101;&#105;&#110;&#111;&#118;<!-- >@. -->&#97;&#98;&#64;<!-- >@. -->&#115;&#101;&#122;<!-- >@. -->&#110;&#97;&#109;&#46;&#99;&#122;
-    
+
+    E-Mail: &#108;&#97;&#109;&#98;&#101;&#105;&#110;&#111;&#118;&#97;&#98;&#64;&#115;&#101;&#122;&#110;&#97;&#109;&#46;&#99;&#122;
+
     <h5>Haftungsausschluss:</h5>
-    
+
     Die Inhalte dieses Spiels wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Als Betreiber des Spiels bin ich gemäß § 7 Abs.1 TMG für eigene Inhalte verantwortlich. Für Inhalte von externen Links übernehme ich keine Haftung, da ich keinen Einfluss auf die Gestaltung und Inhalte der verlinkten Seiten habe.
-    
+
     <h5>Urheberrecht:</h5>
-    
-    Die Inhalte und Werke in diesem Spiel unterliegen dem deutschen Urheberrecht. Vervielfältigung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der Zustimmung des jeweiligen Autors.<br>  
+
+    Die Inhalte und Werke in diesem Spiel unterliegen dem deutschen Urheberrecht. Vervielfältigung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der Zustimmung des jeweiligen Autors.<br>
 </div>
 
 </div>`;
 }
 
+/**
+ * Gibt das HTML-Template für den Bildschirm mit den Nutzungsbedingungen und der Datenschutzerklärung zurück.
+ * Es enthält detaillierte Informationen zur Nutzung des Spiels, zum geistigen Eigentum,
+ * zum Haftungsausschluss, zum Datenschutz und zu Kontaktinformationen.
+ * @returns {string} - Der HTML-String für den Bildschirm mit den Nutzungsbedingungen und der Datenschutzerklärung.
+ */
 function getLegalInformationTemplates() {
     return `<div class="impressum_overlay">
         <button onclick="getHomeScreen()" class="start_screen_btn">Close</button>
@@ -148,7 +182,7 @@ function getLegalInformationTemplates() {
     <h5>8. Geltendes Recht</h5>
     Diese Nutzungsbedingungen unterliegen dem Recht von Bundesrepublik Deutschland. Für Streitigkeiten aus der Nutzung dieses Spiels ist das zuständige Amtsgericht zuständig.
     <h5>9. Kontakt</h5>
-    Bei Fragen oder Anmerkungen zu diesen Nutzungsbedingungen kannst du die Entwicklerin unter &#108;&#97;&#109;<!-- >@. -->&#98;&#101;&#105;&#110;&#111;&#118;<!-- >@. -->&#97;&#98;&#64;<!-- >@. -->&#115;&#101;&#122;<!-- >@. -->&#110;&#97;&#109;&#46;&#99;&#122; erreichen.
+    Bei Fragen oder Anmerkungen zu diesen Nutzungsbedingungen kannst du die Entwicklerin unter &#108;&#97;&#109;&#98;&#101;&#105;&#110;&#111;&#118;&#97;&#98;&#64;&#115;&#101;&#122;&#110;&#97;&#109;&#46;&#99;&#122; erreichen.
     <h2>Datenschutzerklärung für „El Pollo Loco“</h2>
     Ich, die Entwicklerin von „El Pollo Loco“ (weiter einfach als „Spiel“ genannt), nehme den Schutz deiner privaten Daten sehr ernst. Diese Datenschutzerklärung erklärt dir, wie ich mit deinen personenbezogenen Daten umgehe, wenn du das Spiel nutzt. Da ich keine personenbezogenen Daten sammle oder speichere, möchte ich dir transparent darlegen, wie ich deine Privatsphäre schütze.
     <h5>1. Allgemeine Informationen</h5>
