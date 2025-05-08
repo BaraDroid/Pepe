@@ -1,32 +1,32 @@
 class AudioHub {
     /** @type {HTMLAudioElement} - Background music audio object. */
-    static BACKGROUND = new Audio('./audio/cucaracha.mp3'); //eingefügt
+    static BACKGROUND = new Audio('./audio/cucaracha.mp3'); 
     /** @type {HTMLAudioElement} - Walking sound effect audio object. */
-    static WALK = new Audio('./audio/footsteps.mp3'); //eingefügt
+    static WALK = new Audio('./audio/footsteps.mp3'); 
     /** @type {HTMLAudioElement} - Jumping sound effect audio object. */
-    static JUMP = new Audio('./audio/jump_boing.mp3');  //eingefügt
+    static JUMP = new Audio('./audio/jump_boing.mp3');  
     /** @type {HTMLAudioElement} - Hurt sound effect audio object. */
-    static HURT = new Audio('./audio/ouch.mp3');  //eingefügt
+    static HURT = new Audio('./audio/ouch.mp3');  
     /** @type {HTMLAudioElement} - Death sound effect audio object. */
-    static DEAD = new Audio('./audio/male_yell.mp3'); //eingefügt
+    static DEAD = new Audio('./audio/male_yell.mp3'); 
     /** @type {HTMLAudioElement} - Bottle collect sound effect audio object. */
-    static BOTTLECOLLECT = new Audio('./audio/glass_klirr.mp3');    //eingefügt
+    static BOTTLECOLLECT = new Audio('./audio/glass_klirr.mp3');    
     /** @type {HTMLAudioElement} - Bottle throw sound effect audio object. */
-    static BOTTLETHROW = new Audio('./audio/glass_broken.mp3'); //jen kdyz to trefi endbosse, jinak je v tom ale prisernej bordel
+    static BOTTLETHROW = new Audio('./audio/glass_broken.mp3'); 
     /** @type {HTMLAudioElement} - Coin collect sound effect audio object. */
-    static COINCOLLECT = new Audio('./audio/glass_short.mp3');  //eingefügt
+    static COINCOLLECT = new Audio('./audio/glass_short.mp3');  
     /** @type {HTMLAudioElement} - Chicken smash sound effect audio object. */
-    static CHICKENSMASH = new Audio('./audio/chicken_smashed.mp3'); //eingefügt
+    static CHICKENSMASH = new Audio('./audio/chicken_smashed.mp3'); 
     /** @type {HTMLAudioElement} - Boss enter sound effect audio object. */
     static BOSSENTER = new Audio('./audio/chicken_clucking.mp3');
     /** @type {HTMLAudioElement} - Boss hit sound effect audio object. */
-    static BOSSHIT = new Audio('./audio/monster_scream.mp3');   //EINGEFÜGT
+    static BOSSHIT = new Audio('./audio/monster_scream.mp3');   
     /** @type {HTMLAudioElement} - Boss dead sound effect audio object. */
-    static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3'); //nefunguje, pze se mi broken bottle image objevuje furt dokola, takze endboss ani neumre
+    static BOSSDEAD = new Audio('./audio/chicken_kokodak.mp3'); 
     /** @type {HTMLAudioElement} - Victory sound effect audio object. */
-    static VICTORY = new Audio('./audio/fanfare.mp3');  //
+    static VICTORY = new Audio('./audio/fanfare.mp3');  
     /** @type {HTMLAudioElement} - Defeat sound effect audio object. */
-    static DEFEAT = new Audio('./audio/dead.mp3')//eingefügt
+    static DEFEAT = new Audio('./audio/dead.mp3')
     /** @type {HTMLAudioElement[]} - Array containing all audio objects. */
     static ALL = [
         AudioHub.BACKGROUND,
@@ -51,14 +51,9 @@ class AudioHub {
      * Creates an instance of AudioHub.
      */
     constructor() {
-        //this.checkSounds();
     }
 
-    // checkSounds() {
-    //     setInterval(() => {
-
-    //     }, 200);
-    // }
+  
 
     /**
      * Starts playing the background music in a loop.
@@ -112,7 +107,7 @@ class AudioHub {
       */
      static stopAll() {
         AudioHub.ALL.forEach(sound => {
-            sound.pause();  // Pausiert jedes Audio in der Liste
+            sound.pause();  
             sound.currentTime = 0;
         });
         clearInterval(AudioHub.backgroundMusicInterval);

@@ -60,8 +60,7 @@ class StatusBar extends DrawableObject {
      * @param {number} percentage - The new percentage value to set (0-100).
      */
     setPercentage(percentage) {
-        //damit können wir von außen unser percentage setzen
-        this.percentage = percentage; //aus dieser Zahl müssen wir eine Zahl zw. 0 und 5 kriegen//geht bestimmt mit viel Mathematik, er nimmt die leichteste Methode und das ist if Abfrage
+        this.percentage = percentage;
         let imagePath = this.IMAGES_BAR[this.receiveHealthBarIndex()];
         this.img = this.imageCache[imagePath];
     }

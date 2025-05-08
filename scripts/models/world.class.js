@@ -30,7 +30,7 @@ class World {
    * The horizontal offset of the camera in the game world.
    * @type {number}
    */
-  camera_x = 0; //sonst starten wir in der Mitte
+  camera_x = 0;
 
   /**
    * A static flag indicating if the game is over.
@@ -142,7 +142,7 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addObjects();
-    this.ctx.translate(-this.camera_x, 0); //moves camera with character
+    this.ctx.translate(-this.camera_x, 0); 
     this.addIndicators();
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
@@ -187,15 +187,10 @@ class World {
    * @param {MovableObject} movObj - The movable object to add to the map.
    */
   addToMap(movObj) {
-    if (movObj.otherDirection) {  //wir checking das flagg otherDirection, welcher hat Pepe //TODO throwing hat auch so ein flag und dreht mit
+    if (movObj.otherDirection) { 
       this.flipImage(movObj);
     }
-    movObj.draw(this.ctx); //jetzt wird Bild eingefügt, wenn if Bedingung true ist, gespiegelt eingefügt
-
-    //HIER KOMMT DER RECHTECK, DASS WIR IHM DANACH JEDEM GEBEN KÖNNEN
-    // movObj.drawFrame(this.ctx);
-    // movObj.drawOffsetFrame(this.ctx);
-
+    movObj.draw(this.ctx);
     if (movObj.otherDirection) {
       this.flipImageBack(movObj);
     }
@@ -216,10 +211,10 @@ class World {
    * @param {MovableObject} movObj - The movable object whose image should be flipped.
    */
   flipImage(movObj) {
-    this.ctx.save(); //erstmal speichern wir das aktuelle Kontext = die eingefüten Bilder
-    this.ctx.translate(movObj.width, 0); //wir verändern die Methode, wie wir die Bilder einfügen
-    this.ctx.scale(-1, 1); //und das drehen wir alles um(die x Achse ist minus)
-    movObj.x = movObj.x * -1; //sonst fängt die x koordinate auch gespiegelt - also auf anderer Seite und Bild wird versetzt //also drehen wir das mithilfe von -1, unten das gleiche, damit geben wir das zurück
+    this.ctx.save(); 
+    this.ctx.translate(movObj.width, 0); 
+    this.ctx.scale(-1, 1);
+    movObj.x = movObj.x * -1;
   }
 
   /**
@@ -236,15 +231,15 @@ class World {
    */
   run() {
     setInterval(() => {
-      this.checkCollisions(); //check, if an enemy touch Pepe
-      this.checkThrownObjects(); //method to throw bottles
-      this.checkDistanceToEndboss(); //check the distance and I can put another animation on Endboss
+      this.checkCollisions();
+      this.checkThrownObjects();
+      this.checkDistanceToEndboss();
     }, 300);
     setInterval(() => {
-      this.checkCollisionFromJump(); //checking, if Pepe jump on Chicken or Babychicken and make them dead
-      this.checkCollisionsWithCollectableBottles(); //method for collecting salsa bottles from the ground
-      this.checkCollisionsWithCoins(); //check collectiong of golden coins
-      this.checkCollisionsWithThrowableBottles(); //checks collisions with salsa bottles, thrown by Pepe
+      this.checkCollisionFromJump();
+      this.checkCollisionsWithCollectableBottles();
+      this.checkCollisionsWithCoins();
+      this.checkCollisionsWithThrowableBottles();
     }, 1000 / 80);
   }
 
@@ -390,7 +385,6 @@ class World {
    * Checks if the character jumps on a chicken or baby chicken enemy, marking them as dead.
    */
   checkCollisionFromJump() {
-    // Überprüfen, ob das 'enemy' ein Chicken oder Babychicken ist, da Endboss nicht mit Sprung besiegbar ist
     this.level.enemies.forEach((enemy) => {
       if (
         (enemy instanceof Chicken || enemy instanceof Babychicken) &&

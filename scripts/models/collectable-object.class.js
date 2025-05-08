@@ -7,7 +7,7 @@ class CollectableObject extends DrawableObject {
      * The initial x-coordinate of the collectable object, positioned randomly within the level bounds (but at least 100px from the start).
      * @type {number}
      */
-    x = Math.max(100, Level.level_end_x - Math.random() * Level.level_end_x); // Note: Accessing static property 'level_end_x' on 'Level' directly might cause issues if 'Level' is not initialized or 'level_end_x' is not static.
+    x = Math.max(100, Level.level_end_x - Math.random() * Level.level_end_x); 
 
     /**
      * The initial y-coordinate of the collectable object, positioned randomly between 342 and 398 pixels from the top.

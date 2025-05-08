@@ -50,7 +50,7 @@ class MovableObject extends DrawableObject {
      */
     moveRight() {
         this.x += this.speed;
-        this.otherDirection = false; //flag in welche Richtung er gespiegelt wird
+        this.otherDirection = false; 
     }
 
     /**
@@ -78,7 +78,7 @@ class MovableObject extends DrawableObject {
     applyGravity() {
         this.gravityId = setInterval(() => {
             if (this.isAboveGround()) {
-                this.y -= this.speedY; //negative Geschwindigkeit = nach unten
+                this.y -= this.speedY; 
                 this.speedY -= this.accelaration;
             }
         }, 1000 / 25);
@@ -90,9 +90,9 @@ class MovableObject extends DrawableObject {
      */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
-            return true;    //thr.object should always fall
+            return true;    
         } else {
-            return this.y < 147;    //alles andere bleibt auf dem Boden
+            return this.y < 147;    
         }
     }
 
@@ -178,7 +178,6 @@ class MovableObject extends DrawableObject {
      * @param {MovableObject} hittedEnemy - The enemy object that was hit.
      */
 hitEnemy(hittedEnemy) {
-    //every enemy take another amount energy away, it´s one energy pool for all enemies
     if (hittedEnemy instanceof Chicken) {
         this.smashEnemy(hittedEnemy);
     }

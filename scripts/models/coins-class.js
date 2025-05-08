@@ -7,7 +7,7 @@ class Coins extends CollectableObject {
      * The initial x-coordinate of the coin, positioned randomly within the level bounds (but at least 320px from the start).
      * @type {number}
      */
-    x = Math.max(320, Level.level_end_x - Math.random() * Level.level_end_x); // Note: Accessing static property 'level_end_x' on 'Level' directly might cause issues if 'Level' is not initialized or 'level_end_x' is not static.
+    x = Math.max(320, Level.level_end_x - Math.random() * Level.level_end_x); 
 
     /**
      * The initial y-coordinate of the coin, positioned randomly between 100 and 200 pixels from the top.

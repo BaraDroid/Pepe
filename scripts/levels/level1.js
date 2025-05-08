@@ -19,7 +19,6 @@ let level1;
  * @function clearLevel
  */
 function clearLevel() {
-  console.log('level cleared!'); // Note: This log might not directly clear the level instance.
   level1 = "";
 }
 

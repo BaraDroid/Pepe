@@ -339,7 +339,7 @@ class Character extends MovableObject {
      * @method goRight
      */
     goRight() {
-        this.moveRight(); // Inherited from movable object
+        this.moveRight(); 
         AudioHub.playSoundeffect(AudioHub.WALK);
         this.longSleep = false;
         this.isSleeping = false;
@@ -356,7 +356,7 @@ class Character extends MovableObject {
      * @method goLeft
      */
     goLeft() {
-        this.moveLeft(); // Inherited from movable object
+        this.moveLeft(); 
         this.longSleep = false;
         this.isSleeping = false;
         this.sleepAnimationShown = false;
@@ -372,7 +372,7 @@ class Character extends MovableObject {
      * @method goUp
      */
     goUp() {
-        this.jump();    // Inherited from movable object
+        this.jump(); 
         this.longSleep = false;
         this.isSleeping = false;
         this.sleepAnimationShown = false;
@@ -490,9 +490,9 @@ class Character extends MovableObject {
      * @returns {boolean} - True if the character was hit within the last second, false otherwise.
      */
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; // Difference in milliseconds
-        timePassed = timePassed / 1000; // Convert to seconds
-        return timePassed < 1; // True if hit within the last second
+        let timePassed = new Date().getTime() - this.lastHit; 
+        timePassed = timePassed / 1000; 
+        return timePassed < 1; 
     }
 
 }

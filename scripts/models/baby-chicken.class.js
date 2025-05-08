@@ -73,7 +73,7 @@ class Babychicken extends Chicken {
   constructor() {
     super().loadImage("img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
-    this.animate(); // Inherited from MovableObject
+    this.animate(); 
   }
 
 }

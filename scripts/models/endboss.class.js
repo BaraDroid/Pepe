@@ -46,7 +46,7 @@ class Endboss extends MovableObject {
      * Flag indicating if the Endboss is dead.
      * @type {boolean}
      */
-    chickenDead = false; // Note: 'chickenDead' might be a confusing name for the Endboss's death state. Consider renaming.
+    chickenDead = false; 
 
     /**
      * Flag indicating if the Endboss is alert.
@@ -161,7 +161,7 @@ class Endboss extends MovableObject {
         "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G24.png",
         "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G25.png",
         "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png",
-        "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png", // Note: This image path is repeated.
+        "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png", 
     ];
 
     /**
@@ -171,8 +171,8 @@ class Endboss extends MovableObject {
      */
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
-        this.x = Level.level_end_x; // Note: Accessing static property 'level_end_x' on 'Level' directly might cause issues if 'Level' is not initialized or 'level_end_x' is not static.
-        this.speed = 0.1 + Math.random() * 0.5; // Initial speed, might be overridden in animateEndboss
+        this.x = Level.level_end_x; 
+        this.speed = 0.1 + Math.random() * 0.5; 
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
@@ -216,7 +216,7 @@ class Endboss extends MovableObject {
             this.x -= this.speed;
         }
         if (this.isAlert || this.chickenDead) {
-            this.speed = 0; // No movement in these states
+            this.speed = 0; 
         }
     }
 
@@ -225,7 +225,7 @@ class Endboss extends MovableObject {
      * @method checkEndbossDeath
      */
     checkEndbossDeath() {
-        if (World.chicken.energy <= 0) { // Note: Accessing static property 'chicken' on 'World' directly might cause issues if 'World' is not initialized or 'chicken' is not static.
+        if (World.chicken.energy <= 0) { 
             this.chickenDead = true;
         }
     }
@@ -254,10 +254,10 @@ class Endboss extends MovableObject {
     bossDead() {
         AudioHub.playSoundeffect(AudioHub.BOSSDEAD);
         setInterval(() => {
-            this.y += 3; // Move the image off-screen
+            this.y += 3;
         }, 1000 / 60);
         setTimeout(() => {
-            this.chickenDead = false; // Reset the dead flag (might not be necessary here)
+            this.chickenDead = false; 
             getWinScreen();
             AudioHub.stopBackground();
             AudioHub.playSoundeffect(AudioHub.VICTORY);

@@ -56,7 +56,7 @@ class Cloud extends MovableObject {
    * @method animateClouds
    */
   animateClouds() {
-    this.moveLeft(); // This method is now defined within the Cloud class.
+    this.moveLeft(); 
   }
 
   /**

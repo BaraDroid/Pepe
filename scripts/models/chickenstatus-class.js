@@ -31,7 +31,7 @@ class Chickenstatus extends StatusBar {
    * The current health percentage of the Endboss.
    * @type {number}
    */
-  percentage = World.chicken.energy; // Note: Accessing static property 'chicken' on 'World' directly might cause issues if 'World' is not initialized or 'chicken' is not static.
+  percentage = World.chicken.energy; 
 
   /**
    * Array of image paths for the Endboss's health bar.
