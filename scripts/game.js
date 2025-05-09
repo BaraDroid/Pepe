@@ -15,8 +15,6 @@ function clearAllIntervals() {
  * Starts a new game. Initializes game state, music, UI, and game world.
  */
 function startNewGame() {
-    playingMusic = true;
-    AudioHub.playBackground();
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
     initLevel();
@@ -24,7 +22,6 @@ function startNewGame() {
     world = new World(canvas, keyboard);
     world.resetGame();
     checkMuteAtStart();
-    toggleBtnImageInPlayModus();
     initMobileButtons();
 }
 
@@ -71,21 +68,6 @@ function getLossScreen() {
 }
 
 /**
- * Periodically toggles the button image based on the mute state in local storage.
- */
-function toggleBtnImageInPlayModus() {
-    setInterval(() => {
-        let mutedState = localStorage.getItem("muted");
-        if (mutedState == "yes") {
-            changeBtnToMuted();
-        }
-        else if (mutedState == "no") {
-            changeBtnToSound();
-        }
-    }, 200);
-}
-
-/**
  * Stops all currently playing music.
  */
 function stopMusic() {
@@ -117,11 +99,16 @@ function changeBtnToSound() {
  */
 function checkMuteAtStart() {
     let mutedState = localStorage.getItem("muted");
-    if (mutedState == "yes") {
-        stopMusic();
+    if (mutedState === null) {
+        localStorage.setItem("muted", "no");
+        checkMuteAtStart();
     }
-    if (mutedState == "no") {
+    else if (mutedState === "yes") {
+        stopMusic();
+        changeBtnToMuted();
+    } else if (mutedState == "no") {
         AudioHub.playBackground();
+        changeBtnToSound();
     }
 }
 
@@ -131,12 +118,14 @@ function checkMuteAtStart() {
 function toggleMusicInPlayModus() {
     let mutedState = localStorage.getItem("muted");
     if (mutedState == "yes") {
-        AudioHub.playBackground();
         localStorage.setItem("muted", "no");
+        AudioHub.playBackground();
+        changeBtnToSound();
     }
     else if (mutedState == "no") {
-        stopMusic();
         localStorage.setItem("muted", "yes");
+        stopMusic();
+        changeBtnToMuted();
     }
 }
 

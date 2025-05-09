@@ -27,7 +27,6 @@ function clearLevel() {
  * @function initLevel
  */
 function initLevel() {
-  console.log("neues level initialisiert");
   level1 = new Level(
     [
         new Chicken(),
